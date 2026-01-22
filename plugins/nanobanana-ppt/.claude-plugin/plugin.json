@@ -1,0 +1,44 @@
+{
+  "name": "nanobanana-ppt",
+  "version": "2.0.0",
+  "description": "Generate professional PPT presentations using Google Nano Banana Pro AI via MCP. Supports multiple visual styles, fine-grained page allocation, and plugin-style dynamic style system.",
+  "author": {
+    "name": "qso",
+    "url": "https://github.com/qso"
+  },
+  "homepage": "https://github.com/qso/claude-plugins-qso",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qso/claude-plugins-qso.git",
+    "directory": "plugins/nanobanana-ppt"
+  },
+  "license": "MIT",
+  "keywords": [
+    "ppt",
+    "presentation",
+    "slides",
+    "image-generation",
+    "mcp",
+    "nano-banana",
+    "gemini",
+    "ai",
+    "design"
+  ],
+  "requirements": {
+    "python": ">=3.8",
+    "packages": [],
+    "mcp": {
+      "required": true,
+      "servers": ["nanobanana"]
+    }
+  },
+  "mcp": {
+    "config_file": ".mcp.json"
+  },
+  "environment": {
+    "required": [
+      "GEMINI_API_KEY"
+    ]
+  }
+}
+
