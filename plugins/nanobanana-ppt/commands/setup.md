@@ -1,4 +1,5 @@
 ---
+name: setup
 description: Quick setup guide for the NanoBanana PPT plugin (v2.0 - MCP Edition)
 ---
 

@@ -1,4 +1,5 @@
 ---
+name: generate
 description: Generate a professional PPT presentation from a document using AI
 ---
 

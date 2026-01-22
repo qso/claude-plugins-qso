@@ -1,4 +1,5 @@
 ---
+name: styles
 description: List and preview available PPT visual styles
 ---
 

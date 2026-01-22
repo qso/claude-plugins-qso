@@ -1,0 +1,45 @@
+{
+  "name": "claude-plugins-qso",
+  "displayName": "QSO Claude Plugins",
+  "description": "QSO's collection of high-quality Claude Code plugins for AI-powered presentations and more",
+  "version": "1.0.0",
+  "author": {
+    "name": "qso",
+    "url": "https://github.com/qso"
+  },
+  "homepage": "https://github.com/qso/claude-plugins-qso",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qso/claude-plugins-qso.git"
+  },
+  "plugins": [
+    {
+      "name": "nanobanana-ppt",
+      "displayName": "Nano Banana PPT Generator",
+      "description": "Generate professional PPT presentations using Google Nano Banana Pro AI via MCP. Supports multiple visual styles, fine-grained page allocation, and dynamic style system.",
+      "version": "2.0.0",
+      "source": "plugins/nanobanana-ppt",
+      "keywords": [
+        "ppt",
+        "presentation",
+        "slides",
+        "image-generation",
+        "mcp",
+        "nano-banana",
+        "gemini",
+        "ai",
+        "design"
+      ],
+      "license": "MIT",
+      "requirements": {
+        "environment": [
+          "GEMINI_API_KEY"
+        ],
+        "mcp": {
+          "required": true,
+          "servers": ["nanobanana"]
+        }
+      }
+    }
+  ]
+}
