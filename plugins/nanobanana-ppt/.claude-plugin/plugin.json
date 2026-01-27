@@ -7,11 +7,7 @@
     "url": "https://github.com/qso"
   },
   "homepage": "https://github.com/qso/claude-plugins-qso",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/qso/claude-plugins-qso.git",
-    "directory": "plugins/nanobanana-ppt"
-  },
+  "repository": "https://github.com/qso/claude-plugins-qso.git",
   "license": "MIT",
   "keywords": [
     "ppt",
@@ -23,22 +19,6 @@
     "gemini",
     "ai",
     "design"
-  ],
-  "requirements": {
-    "python": ">=3.8",
-    "packages": [],
-    "mcp": {
-      "required": true,
-      "servers": ["nanobanana"]
-    }
-  },
-  "mcp": {
-    "config_file": ".mcp.json"
-  },
-  "environment": {
-    "required": [
-      "GEMINI_API_KEY"
-    ]
-  }
+  ]
 }
 
