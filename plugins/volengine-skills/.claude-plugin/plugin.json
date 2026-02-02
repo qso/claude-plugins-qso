@@ -1,0 +1,22 @@
+{
+  "name": "volengine-asr",
+  "version": "1.0.0",
+  "description": "Volcengine ASR (Automatic Speech Recognition) plugin using ByteDance's advanced speech recognition API. Transcribe audio files to text with support for multiple languages and speakers.",
+  "author": {
+    "name": "qso",
+    "url": "https://github.com/qso"
+  },
+  "homepage": "https://github.com/qso/claude-plugins-qso",
+  "repository": "https://github.com/qso/claude-plugins-qso.git",
+  "license": "MIT",
+  "keywords": [
+    "asr",
+    "speech-recognition",
+    "transcription",
+    "volcengine",
+    "byte-dance",
+    "audio",
+    "voice-to-text",
+    "ai"
+  ]
+}
