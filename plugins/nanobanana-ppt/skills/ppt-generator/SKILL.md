@@ -172,23 +172,18 @@ Display summary with:
 
 ## Error Handling
 
-**MCP Server Not Configured**
-```
-Solution:
-- Ensure .mcp.json is configured
-- Run: /nanobanana-ppt:setup
-```
-
 **API Key Not Set**
 ```
 Solution: export GEMINI_API_KEY='your-api-key'
+Get key from: https://makersuite.google.com/app/apikey
 ```
 
 **MCP Tool Call Failed**
 ```
 Solution:
 - Check MCP server is running
-- Verify API key
+- Verify API key validity
+- Check network connection
 - Retry failed slide
 ```
 
