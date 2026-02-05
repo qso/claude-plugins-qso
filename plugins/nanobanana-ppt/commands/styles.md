@@ -9,87 +9,60 @@ View all available visual styles for PPT generation and their characteristics.
 
 ## Available Styles
 
-### 1. Gradient Glass Card Style
+The following styles are currently available in `${CLAUDE_PLUGIN_ROOT}/styles/`:
 
-**File**: `styles/gradient-glass.md`
+Run the list-styles script to see all available styles:
 
-**Visual Characteristics**:
-- Apple Keynote minimalism with glassmorphism
-- 3D glass objects with volumetric lighting
-- Neon purple, electric blue, coral orange gradients
-- Deep void black or ceramic white base
-- Cinema-grade ray tracing and ambient occlusion
-- Bento box grid layout with frosted glass containers
+```bash
+${CLAUDE_PLUGIN_ROOT}/scripts/list-styles.sh
+```
 
-**Best For**:
-- 🚀 Tech product launches
-- 💼 Business presentations
-- 📊 Data reports and analytics
-- 🏢 Corporate brand showcases
-- 💻 SaaS product demos
-
-**Atmosphere**: Premium, immersive, clean, futuristic
-
-**Example Elements**:
-- Floating 3D capsules and geometric shapes
-- Glowing neon charts and data visualizations
-- Polished metal, iridescent acrylic materials
-- Aurora wave backgrounds
-- Cinematic lighting effects
-
-### 2. Vector Illustration Style
-
-**File**: `styles/vector-illustration.md`
-
-**Visual Characteristics**:
-- Flat vector illustration with uniform black outlines
-- Geometric simplification (toy-like models)
-- Retro soft color palette: coral red, mint green, mustard yellow
-- Cream/off-white paper texture background
-- Panoramic composition in top 1/3 of canvas
-- Decorative geometric elements (dots, stars, rays)
-
-**Best For**:
-- 📚 Educational presentations and training
-- 🎨 Creative proposals and pitches
-- 👶 Children's content and family topics
-- 💖 Warm brand storytelling
-- 🌟 Community and social initiatives
-
-**Atmosphere**: Warm, approachable, playful, nostalgic
-
-**Example Elements**:
-- Simplified buildings and trees with black outlines
-- Retro serif typography for headlines
-- Geometric icons and small illustrations
-- Pill-shaped clouds and decorative elements
-- Clean, coloring-book style line art
-
-## Style Comparison
-
-| Aspect | Gradient Glass | Vector Illustration |
-|--------|----------------|---------------------|
-| **Visual Style** | 3D, realistic, futuristic | 2D, flat, geometric |
-| **Color Mood** | Bold, vibrant, high-tech | Soft, retro, warm |
-| **Complexity** | High detail, cinematic | Simple, clean lines |
-| **Use Case** | Tech, business, data | Education, creative, story |
-| **Audience** | Professional, corporate | General, friendly, casual |
-| **Rendering** | Photorealistic 3D | Vector graphics |
+This will display:
+- Style ID (for specifying in generation)
+- Style Name
+- Tags (keywords describing the style)
+- Use Cases (recommended scenarios)
 
 ## How to Use Styles
 
-When generating a PPT, you'll be prompted to choose a style:
+When generating a PPT, specify your preferred style:
 
+**By Style ID**:
 ```
-/nanobanana-ppt:generate my-document.md
+使用 gradient-glass 风格生成PPT
 ```
 
-The system will ask:
+**By Description**:
 ```
-Which style would you like?
-1. Gradient Glass (modern/tech)
-2. Vector Illustration (warm/creative)
+生成一个极简风格的PPT
 ```
+The system will match your description to available styles.
+
+**No Style Specified**:
+```
+生成一个15页的PPT
+```
+The system will prompt you to choose from available styles.
+
+## Style Selection Tips
+
+### For Tech/Business Content
+✅ **gradient-glass**: Modern, 3D, professional
+- Great for product launches
+- Excellent for data visualization
+- High-end aesthetic with glassmorphism
+
+### For Minimal/Clean Design
+✅ **linear-web**: Minimalist, flat, Swiss design
+- Perfect for startups
+- Clean geometric layouts
+- Modern sans-serif typography
+
+### For Education/Creative Content
+✅ **vector-illustration**: Warm, flat, retro
+- Friendly and approachable
+- Great for storytelling
+- Works well with diverse audiences
 
 ## Creating Custom Styles
 
@@ -97,124 +70,119 @@ You can create your own custom styles:
 
 1. **Create a new file** in the `styles/` directory:
    ```bash
-   cp styles/gradient-glass.md styles/my-custom-style.md
+   cp styles/linear-web.md styles/my-custom-style.md
    ```
 
-2. **Edit the style definition** with these sections:
-   - Style ID and name
-   - Visual description
-   - Base prompt template
-   - Page type templates (cover, content, data)
-   - Technical parameters
+2. **Edit the style definition** with these required sections:
+   ```markdown
+   <!--
+   风格元数据(必填)
+   style_id: my-custom-style
+   style_name: 我的自定义风格
+   tags: tag1, tag2, tag3
+   use_cases: use-case1, use-case2
+   -->
 
-3. **Use your custom style**:
-   The plugin will automatically detect and offer your new style
+   # 风格名称
 
-### Style Template Structure
+   ## 风格ID
+   my-custom-style
 
-```markdown
-# Your Style Name
+   ## 基础提示词模板
+   [详细的AI绘画提示词...]
 
-## Style ID
-your-style-id
+   ## 页面类型模板
+   ### 封面页模板
+   [封面页构图说明...]
 
-## Style Description
-Brief description of the visual aesthetic
+   ### 内容页模板
+   [内容页构图说明...]
 
-## Base Prompt Template
-[Detailed prompt that defines the overall visual language]
+   ### 数据页模板
+   [数据页构图说明...]
+   ```
 
-## Page Type Templates
+3. **Run the list-styles script** to verify:
+   ```bash
+   ${CLAUDE_PLUGIN_ROOT}/scripts/list-styles.sh
+   ```
 
-### Cover Page Template
-Layout logic for title slides
+4. **Use your custom style**:
+   The system will automatically detect it and offer it as an option
 
-### Content Page Template
-Layout logic for content slides
+## Resolution Recommendations
 
-### Data Page Template
-Layout logic for data/summary slides
+### For All Styles
+- **2K** (recommended): Balanced quality and speed, ~30s per slide
+- **4K** (high quality): Best for printing or large displays, ~60s per slide
 
-## Technical Parameters
-- Model: gemini-3-pro-image-preview
-- Aspect Ratio: 16:9
-- Resolution: 2K or 4K
-```
+### When to Use 4K
+- Large screen presentations
+- Printed materials
+- High-detail visual styles (e.g., 3D, gradients)
+- Portfolio or showcase pieces
 
-## Style Tips
+### When to Use 2K
+- Daily presentations
+- Screen sharing (Zoom, Teams)
+- Quick turnaround needed
+- Online distribution
 
-### For Tech/Business Content
-✅ Use **Gradient Glass** style
-- Professional and modern
-- Great for data visualization
-- High-end aesthetic
-- Works well with statistics and metrics
+## Style Comparison
 
-### For Education/Creative Content
-✅ Use **Vector Illustration** style
-- Friendly and approachable
-- Easy to understand
-- Works well with concepts and stories
-- Great for diverse audiences
+Different styles excel in different scenarios:
 
-### Mixed Style Strategy
+| Style | Best For | Mood | Complexity |
+|-------|----------|------|------------|
+| gradient-glass | Tech, business, data | Modern, futuristic | High (3D) |
+| linear-web | Startups, portfolios | Minimal, clean | Medium |
+| vector-illustration | Education, stories | Warm, friendly | Low (flat) |
 
-For longer presentations (15+ slides), consider:
-1. Use Gradient Glass for data-heavy slides
-2. Use Vector Illustration for concept/story slides
-3. Generate two separate decks and combine manually
-
-## Resolution Recommendations by Style
-
-### Gradient Glass
-- **2K**: Perfect for screen presentations
-- **4K**: Recommended for large displays or printing (showcases 3D details)
-
-### Vector Illustration
-- **2K**: Usually sufficient (vector style scales well)
-- **4K**: Only if printing or large format output
+Choose based on your:
+- **Audience**: Corporate vs casual vs creative
+- **Content**: Data-heavy vs conceptual vs narrative
+- **Context**: Launch vs training vs pitch
 
 ## Preview Styles
 
 To see examples of each style:
 
-1. Check the `outputs/` directory for any previously generated presentations
-2. Review the style definition files directly:
-   - `styles/gradient-glass.md`
-   - `styles/vector-illustration.md`
-3. Generate a small test deck (3-5 slides) in each style to compare
+**Option 1: Generate Test Decks**
+```bash
+/nanobanana-ppt:generate
+Create a 3-slide test presentation about "AI Technology"
+Choose different styles to compare
+```
 
-## Style Customization Tips
+**Option 2: Review Style Files**
+```bash
+ls -la ${CLAUDE_PLUGIN_ROOT}/styles/
+cat ${CLAUDE_PLUGIN_ROOT}/styles/gradient-glass.md
+cat ${CLAUDE_PLUGIN_ROOT}/styles/linear-web.md
+cat ${CLAUDE_PLUGIN_ROOT}/styles/vector-illustration.md
+```
 
-### Adjusting Gradient Glass
-- Modify color gradients in the prompt
-- Change 3D object types (capsules, spheres, waves)
-- Adjust lighting intensity
-- Change base color (dark vs light mode)
+**Option 3: Check Previous Outputs**
+```bash
+ls -la outputs/
+```
 
-### Adjusting Vector Illustration
-- Change color palette (keep retro/soft tones)
-- Modify line thickness
-- Add or remove decorative elements
-- Adjust geometric simplification level
+## Dynamic Style Discovery
 
-## Technical Details
+The plugin automatically discovers all styles in the styles directory.
+No configuration needed - just add a new `.md` file and it will appear in the list!
 
-Both styles use:
-- **Model**: Gemini 3 Pro Image Preview (Nano Banana Pro)
-- **Aspect Ratio**: 16:9 (standard presentation format)
-- **Output Format**: PNG images
-- **Generation Time**: 30-60 seconds per slide
+To see all available styles at any time:
+```bash
+${CLAUDE_PLUGIN_ROOT}/scripts/list-styles.sh
+```
 
 ---
 
-Want to see these styles in action? Try:
+Ready to create a presentation?
 
 ```
 /nanobanana-ppt:generate
-
-Create a 3-slide test presentation about "AI Technology"
 ```
 
-Then choose each style to compare the results!
-
+Choose your style and start generating!
