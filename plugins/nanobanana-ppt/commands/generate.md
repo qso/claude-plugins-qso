@@ -153,7 +153,7 @@ Total: 15 ✓
 
 1. **MCP Server**: Configured in `.mcp.json`
 2. **API Key**: `export GEMINI_API_KEY='your-api-key'`
-   - Get from: https://makersuite.google.com/app/apikey
+   - Get from: https://aistudio.google.com/api-keys
 3. **uvx**: `pip install uv` (for MCP server)
 
 ## Examples
@@ -216,7 +216,7 @@ System: Validates, generates
 
 📁 输出位置:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-outputs/20260122_103000/
+[Custom Path if specified] OR outputs/20260122_103000/
 ├── images/slide-*.png
 ├── slides_plan.json
 ├── prompts.json
@@ -224,7 +224,7 @@ outputs/20260122_103000/
 
 🎬 查看:
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-open outputs/20260122_103000/index.html
+open [custom-path/index.html OR outputs/20260122_103000/index.html
 ```
 
 **Viewer Controls**:

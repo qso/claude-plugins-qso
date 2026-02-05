@@ -80,8 +80,8 @@ Use Cases: tech-product, business-presentation, data-report, brand-showcase
 - Default: 2K
 
 **7. Output Directory**
-- Default: `outputs/[TIMESTAMP]/`
-- Use custom path if specified
+- Default: `outputs/[TIMESTAMP]/` (if not specified by user)
+- Use custom path if user specified one in request
 
 ### Phase 2: Analyze Document and Plan Content
 
@@ -217,7 +217,7 @@ Solution: Re-calculate or ask user to adjust
 
 **Output Structure**:
 ```
-outputs/[TIMESTAMP]/
+[Custom Path if specified] OR outputs/[TIMESTAMP]/
 ├── images/slide-*.png
 ├── slides_plan.json
 ├── prompts.json
