@@ -1,7 +1,7 @@
 {
   "name": "deep-research",
-  "version": "1.0.0",
-  "description": "Conduct enterprise-grade research with multi-source synthesis, citation tracking, and verification. Supports 8-phase research pipeline with source credibility scoring and parallel retrieval.",
+  "version": "1.2.0",
+  "description": "Conduct enterprise-grade research with multi-source synthesis, citation tracking, and verification. Supports 8-phase research pipeline with source credibility scoring, parallel retrieval, and reference materials preservation. Default output in Chinese with LLM-driven HTML generation.",
   "author": {
     "name": "qso",
     "url": "https://github.com/qso"
