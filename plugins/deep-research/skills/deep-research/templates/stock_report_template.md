@@ -1,4 +1,4 @@
-# Stock Analysis Report: [Company Name] ([Ticker])
+# 股票分析报告：[Company Name] ([Ticker])
 
 <!-- TYPE: stock -->
 <!-- Universal writing standards, citation rules, and progressive assembly strategy: see report_template.md -->
@@ -9,21 +9,21 @@ not constitute investment advice. Always conduct your own due diligence before m
 investment decisions. -->
 
 <!-- GENERATION WORKFLOW (Stock):
-1. Executive Summary (with investment thesis) → Write to file
-2. Company Overview → Edit/append
-3. Financial Fundamentals → Edit/append
-4. Industry Position & Competitive Moat → Edit/append
-5. Recent Catalysts & News → Edit/append
-6. Risk Analysis → Edit/append
-7. Valuation Analysis → Edit/append
-8. Investment Recommendation → Edit/append
-9. Bibliography (ALL citations) → Edit/append
-10. Methodology → Edit/append
+1. 执行摘要 (with investment thesis) → Write to file
+2. 公司概述 → Edit/append
+3. 财务基本面 → Edit/append
+4. 行业地位与竞争壁垒 → Edit/append
+5. 近期催化剂与动态 → Edit/append
+6. 风险分析 → Edit/append
+7. 估值分析 → Edit/append
+8. 投资建议 → Edit/append
+9. 参考文献 (ALL citations) → Edit/append
+10. 附录：研究方法 → Edit/append
 -->
 
 > **Disclaimer:** This analysis is for research and educational purposes only and does not constitute investment advice. Always conduct your own due diligence before making investment decisions.
 
-## Executive Summary
+## 执行摘要
 
 [One paragraph investment thesis, 100-250 words]
 - **Stance:** [Buy / Hold / Sell] at current price of $[X]
@@ -32,15 +32,15 @@ investment decisions. -->
 - **Key Catalyst:** [Single most important near-term catalyst]
 - **Key Risk:** [Single most important risk factor]
 
-**Confidence Level:** [High/Medium/Low with brief justification]
+**信心等级:** [High/Medium/Low with brief justification]
 
 ---
 
-## Company Overview
+## 公司概述
 
 <!-- 500-800 words. What the business actually does. -->
 
-### Business Model
+### 商业模式
 
 [2-3 paragraphs explaining:]
 - What the company does (products/services)
@@ -48,14 +48,14 @@ investment decisions. -->
 - Customer segments and geographic breakdown
 - How the company makes money (unit economics if available)
 
-### Corporate History & Management
+### 公司历史与管理层
 
 [1-2 paragraphs on:]
 - Key milestones and corporate evolution
 - Current CEO and leadership team (tenure, track record)
 - Recent strategic direction changes
 
-### Revenue Structure
+### 营收结构
 
 | Segment | Revenue | % of Total | YoY Growth |
 |---------|---------|-----------|------------|
@@ -67,11 +67,11 @@ investment decisions. -->
 
 ---
 
-## Financial Fundamentals
+## 财务基本面
 
 <!-- 800-1,200 words. The quantitative core. Include multi-year data tables. -->
 
-### Revenue & Profit Trends
+### 收入与利润趋势
 
 [2-3 paragraphs analyzing:]
 - Revenue trajectory (3-5 year trend)
@@ -87,7 +87,7 @@ investment decisions. -->
 | Net Income | $[X]B | $[X]B | $[X]B | $[X]B | $[X]B |
 | EPS | $[X] | $[X] | $[X] | $[X] | $[X] |
 
-### Balance Sheet Health
+### 资产负债表健康度
 
 [1-2 paragraphs on:]
 - Cash and equivalents vs. total debt
@@ -95,7 +95,7 @@ investment decisions. -->
 - Current ratio and liquidity position
 - Recent capital allocation decisions
 
-### Cash Flow
+### 现金流
 
 [1-2 paragraphs on:]
 - Free cash flow generation and trend
@@ -103,7 +103,7 @@ investment decisions. -->
 - Capital expenditure patterns
 - Shareholder returns (dividends, buybacks)
 
-### Key Ratios
+### 关键指标
 
 | Ratio | Current | 5Y Average | Sector Average |
 |-------|---------|-----------|----------------|
@@ -118,18 +118,18 @@ investment decisions. -->
 
 ---
 
-## Industry Position & Competitive Moat
+## 行业地位与竞争壁垒
 
 <!-- 500-800 words. Moat analysis and peer comparison. -->
 
-### Market Position
+### 市场地位
 
 [2-3 paragraphs on:]
 - Market share and ranking within industry
 - Industry growth outlook (TAM, growth rate)
 - Where the company sits in the value chain
 
-### Competitive Advantages (Moat Analysis)
+### 竞争优势（护城河分析）
 
 [2-3 paragraphs evaluating moat sources:]
 - **Brand:** [Strength and evidence]
@@ -138,7 +138,7 @@ investment decisions. -->
 - **Cost Advantages / Scale:** [Structural cost advantages]
 - **IP / Patents:** [If relevant]
 
-### Peer Comparison
+### 同业对比
 
 | Metric | [Company] | [Peer 1] | [Peer 2] | [Peer 3] |
 |--------|-----------|----------|----------|----------|
@@ -151,11 +151,11 @@ investment decisions. -->
 
 ---
 
-## Recent Catalysts & News
+## 近期催化剂与动态
 
 <!-- 400-600 words. What's happened recently that matters. -->
 
-### Latest Earnings
+### 最新财报
 
 [2-3 paragraphs on most recent quarter:]
 - Revenue and EPS vs. expectations (beat/miss/in-line)
@@ -163,7 +163,7 @@ investment decisions. -->
 - Forward guidance changes
 - Market reaction
 
-### Recent Developments
+### 近期发展
 
 [2-3 paragraphs on other significant events:]
 - Product launches or pipeline updates
@@ -172,7 +172,7 @@ investment decisions. -->
 - Regulatory developments
 - Partnerships or strategic shifts
 
-### Upcoming Catalysts
+### 即将到来的催化剂
 
 [1 paragraph listing near-term events to watch:]
 - Next earnings date
@@ -183,17 +183,17 @@ investment decisions. -->
 
 ---
 
-## Risk Analysis
+## 风险分析
 
 <!-- 500-800 words. Comprehensive risk inventory. -->
 
-### Bear Case
+### 看空论点
 
 [2-3 paragraphs constructing the strongest argument against the stock:]
 - What specific scenarios would cause significant decline
 - Quantify potential downside where possible
 
-### Key Risk Factors
+### 关键风险因素
 
 **Competition Risk:** [1-2 paragraphs on competitive threats]
 
@@ -205,7 +205,7 @@ investment decisions. -->
 
 **Valuation Risk:** [1 paragraph on downside if multiples compress]
 
-### Short Seller / Contrarian Views
+### 做空方/逆向观点
 
 [1-2 paragraphs summarizing notable bearish arguments if they exist]
 
@@ -213,25 +213,25 @@ investment decisions. -->
 
 ---
 
-## Valuation Analysis
+## 估值分析
 
 <!-- 500-800 words. Is it cheap, fair, or expensive? -->
 
-### Current Valuation
+### 当前估值
 
 [2-3 paragraphs analyzing:]
 - Current multiples vs. historical range (5Y)
 - Current multiples vs. peers and sector
 - Premium/discount and justification
 
-### Valuation Framework
+### 估值框架
 
 [2-3 paragraphs with at least one approach:]
 - **Comparable Analysis:** Peer multiples applied to company metrics
 - **DCF / Intrinsic Value:** If data supports it (state assumptions clearly)
 - **Sum-of-Parts:** If applicable (diversified businesses)
 
-### Price Target Range
+### 目标价格区间
 
 | Scenario | Multiple | Implied Price | Upside/Downside |
 |----------|----------|---------------|-----------------|
@@ -243,32 +243,32 @@ investment decisions. -->
 
 ---
 
-## Investment Recommendation
+## 投资建议
 
 <!-- 400-600 words. Clear, actionable conclusion. -->
 
-### Rating: [Buy / Hold / Sell]
+### 评级：[买入 / 持有 / 卖出]
 
 [2-3 paragraphs explaining:]
 - Clear rationale for the rating
 - Price target and time horizon
 - Key assumptions behind the recommendation
 
-### Position Sizing Considerations
+### 仓位管理建议
 
 [1 paragraph on:]
 - Risk level (conservative/moderate/aggressive)
 - Suggested portfolio allocation range
 - Entry point considerations
 
-### Key Metrics to Watch
+### 关键跟踪指标
 
 [5-7 specific metrics that would change the thesis:]
 1. [Metric]: Watch for [threshold/change] → would signal [implication]
 2. [Metric]: Watch for [threshold/change] → would signal [implication]
 3. [Continue...]
 
-### When to Reassess
+### 重新评估时机
 
 [1 paragraph on triggers that would warrant re-evaluation:]
 - Upside triggers (upgrade conditions)
@@ -276,7 +276,7 @@ investment decisions. -->
 
 ---
 
-## Bibliography
+## 参考文献
 
 <!-- COMPLETE bibliography - EVERY citation used in report -->
 <!-- Format: [N] Author/Org (Year). "Title". Publication. URL (Retrieved: Date) -->
@@ -286,25 +286,25 @@ investment decisions. -->
 
 ---
 
-## Appendix: Methodology
+## 附录：研究方法
 
-### Research Process
+### 研究过程
 
 [2-3 paragraphs describing research approach]
 
-### Sources Consulted
+### 来源概览
 
 **Total Sources:** [Number]
 **Source Types:** Financial filings: [N], Analyst reports: [N], News: [N], Industry data: [N], Other: [N]
 
-### Verification Approach
+### 验证方法
 
 **Triangulation:** How financial data was cross-referenced
 **Credibility Assessment:** Source quality evaluation
 
 ---
 
-## Report Metadata
+## 报告元数据
 
 **Research Mode:** [Quick/Standard/Deep/UltraDeep]
 **Research Type:** Stock

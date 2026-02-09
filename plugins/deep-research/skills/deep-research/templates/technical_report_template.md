@@ -1,24 +1,24 @@
-# Research Report: [Topic]
+# 调研报告：[Topic]
 
 <!-- TYPE: technical -->
 <!-- Universal writing standards, citation rules, and progressive assembly strategy: see report_template.md -->
 <!-- This template defines SECTION STRUCTURE ONLY for technical research reports -->
 
 <!-- GENERATION WORKFLOW (Technical):
-1. Executive Summary → Write to file
-2. What Is It & Why It Exists → Edit/append
-3. Core Concepts & Principles → Edit/append
-4. Architecture & How It Works → Edit/append
-5. Developer Experience → Edit/append (if applicable)
-6. Ecosystem & Maturity → Edit/append
-7. Performance & Limitations → Edit/append
-8. Alternatives & Landscape → Edit/append (if applicable)
-9. Relevance & Recommendations → Edit/append
-10. Bibliography (ALL citations) → Edit/append
-11. Methodology → Edit/append
+1. 执行摘要 → Write to file
+2. 概述与背景 → Edit/append
+3. 核心概念与原理 → Edit/append
+4. 架构与工作原理 → Edit/append
+5. 开发者体验 → Edit/append (if applicable)
+6. 生态与成熟度 → Edit/append
+7. 性能与局限性 → Edit/append
+8. 替代方案与技术格局 → Edit/append (if applicable)
+9. 相关性与建议 → Edit/append
+10. 参考文献 (ALL citations) → Edit/append
+11. 研究方法 → Edit/append
 -->
 
-## Executive Summary
+## 执行摘要
 
 [Write 3-5 bullet points, 50-250 words total]
 - **Core Finding:** [What the technology is and its primary value proposition]
@@ -26,22 +26,22 @@
 - **Maturity & Ecosystem:** [Current state of adoption and tooling]
 - **Relevance:** [Whether and when to adopt, one-sentence verdict]
 
-**Confidence Level:** [High/Medium/Low with brief justification]
+**信心等级:** [High/Medium/Low with brief justification]
 
 ---
 
-## What Is It & Why It Exists
+## 概述与背景
 
 <!-- 400-800 words. Context and motivation. -->
 
-### Background & Problem Statement
+### 背景与问题
 
 [2-3 paragraphs explaining:]
 - What problem existed before this technology
 - What motivated its creation (pain points, limitations of predecessors)
 - Who created it and when (origin story, key contributors)
 
-### What It Is
+### 定义与定位
 
 [2-3 paragraphs explaining:]
 - Clear definition and classification (what category of tool/framework/protocol)
@@ -53,19 +53,19 @@
 
 ---
 
-## Core Concepts & Principles
+## 核心概念与原理
 
 <!-- 500-1,000 words. Mental models the reader needs. -->
 
 [2-4 paragraphs covering the fundamental abstractions and design philosophy:]
 
-### Key Abstractions
+### 关键抽象
 
 - **[Concept 1]:** [Clear explanation with concrete example]
 - **[Concept 2]:** [Clear explanation with concrete example]
 - **[Concept 3]:** [Clear explanation with concrete example]
 
-### Design Philosophy
+### 设计哲学
 
 [1-2 paragraphs on the guiding principles behind technical decisions]
 - What trade-offs were explicitly chosen and why
@@ -76,18 +76,18 @@
 
 ---
 
-## Architecture & How It Works
+## 架构与工作原理
 
 <!-- 800-1,500 words. Technical internals. This is the core of a technical report. -->
 
-### System Architecture
+### 系统架构
 
 [2-3 paragraphs describing the overall architecture:]
 - Component breakdown and responsibilities
 - How components interact (data flow, control flow)
 - Key interfaces and boundaries
 
-### Key Mechanisms
+### 关键机制
 
 <!-- Deep dive into 2-3 critical implementation details -->
 
@@ -97,7 +97,7 @@
 **[Mechanism 2: Name]**
 [2-3 paragraphs with technical depth]
 
-### Data Flow
+### 数据流
 
 [1-2 paragraphs describing how data moves through the system]
 [Text-based diagram if helpful]
@@ -106,18 +106,18 @@
 
 ---
 
-## Developer Experience
+## 开发者体验
 
 <!-- 400-600 words. OPTIONAL - include if evidence supports. -->
 
-### Getting Started
+### 入门体验
 
 [1-2 paragraphs on:]
 - Setup complexity and prerequisites
 - Time to "Hello World" or first working example
 - Quality of official getting-started guide
 
-### Day-to-Day Usage
+### 日常使用
 
 [1-2 paragraphs on:]
 - Learning curve (steep/gradual, with specifics)
@@ -130,11 +130,11 @@
 
 ---
 
-## Ecosystem & Maturity
+## 生态与成熟度
 
 <!-- 500-800 words. Community health and production readiness. -->
 
-### Community & Adoption
+### 社区与采用
 
 [2-3 paragraphs covering:]
 - Community size metrics (GitHub stars, npm downloads, contributors, etc.)
@@ -142,14 +142,14 @@
 - Conference presence, blog/tutorial ecosystem
 - Bus factor and governance model
 
-### Libraries & Integrations
+### 库与集成
 
 [1-2 paragraphs on:]
 - Key third-party libraries and plugins
 - Integration with other tools in the typical stack
 - Gaps in the ecosystem
 
-### Release & Stability
+### 发布与稳定性
 
 [1-2 paragraphs on:]
 - Release cadence and versioning policy
@@ -160,18 +160,18 @@
 
 ---
 
-## Performance & Limitations
+## 性能与局限性
 
 <!-- 500-800 words. Honest assessment of trade-offs. -->
 
-### Benchmarks & Performance Characteristics
+### 基准测试与性能特征
 
 [2-3 paragraphs with specific data:]
 - Available benchmark results (with methodology context)
 - Scaling characteristics (what happens at 10x, 100x)
 - Memory, CPU, latency profiles if relevant
 
-### Known Limitations
+### 已知局限
 
 [2-3 paragraphs covering:]
 - What it is NOT good at (explicit trade-offs)
@@ -183,17 +183,17 @@
 
 ---
 
-## Alternatives & Landscape
+## 替代方案与技术格局
 
 <!-- 300-500 words. OPTIONAL - brief positioning, not a full comparison. -->
 
-### Primary Alternatives
+### 主要替代方案
 
 [1-2 paragraphs briefly positioning 2-3 alternatives:]
 - Alternative A: When you'd choose it instead, key differentiator
 - Alternative B: When you'd choose it instead, key differentiator
 
-### When NOT to Use [This Technology]
+### 何时不应使用
 
 [1 paragraph on scenarios where alternatives are clearly better]
 
@@ -201,18 +201,18 @@
 
 ---
 
-## Relevance & Recommendations
+## 相关性与建议
 
 <!-- 400-600 words. Actionable conclusions. -->
 
-### Assessment for Our Context
+### 适用性评估
 
 [2-3 paragraphs analyzing:]
 - Is this relevant to our technology stack and goals?
 - What would adoption look like (effort, timeline, risks)?
 - What problems would it solve for us specifically?
 
-### Recommendations
+### 建议
 
 **Adopt / Evaluate / Hold / Avoid** — [Clear stance with rationale]
 
@@ -220,13 +220,13 @@
 2. **[Next Step]:** [What to investigate further]
 3. **[Watch For]:** [Key developments that would change the recommendation]
 
-### Further Investigation Needed
+### 待深入调查
 
 [2-3 specific questions that remain unanswered]
 
 ---
 
-## Bibliography
+## 参考文献
 
 <!-- COMPLETE bibliography - EVERY citation used in report -->
 <!-- Format: [N] Author/Org (Year). "Title". Publication. URL (Retrieved: Date) -->
@@ -236,9 +236,9 @@
 
 ---
 
-## Appendix: Methodology
+## 附录：研究方法
 
-### Research Process
+### 研究过程
 
 [2-3 paragraphs describing research approach]
 
@@ -248,19 +248,19 @@
 - Phase 3 (RETRIEVE): [What was done]
 - [Continue for all phases executed]
 
-### Sources Consulted
+### 来源概览
 
 **Total Sources:** [Number]
 **Source Types:** Documentation: [N], Blog posts: [N], GitHub: [N], Academic: [N], Other: [N]
 
-### Verification Approach
+### 验证方法
 
 **Triangulation:** How claims were verified across multiple sources
 **Credibility Assessment:** Source quality evaluation approach
 
 ---
 
-## Report Metadata
+## 报告元数据
 
 **Research Mode:** [Quick/Standard/Deep/UltraDeep]
 **Research Type:** Technical

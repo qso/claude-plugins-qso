@@ -55,7 +55,7 @@ Execution Loop (per phase)
 └─ Update progress
 
 Validation Gate
-├─ Run `python scripts/validate_report.py --report [path]`
+├─ Run `python3 ${CLAUDE_PLUGIN_ROOT}/scripts/validate_report.py --report [path]`
 ├─ Pass? → Deliver
 └─ Fail? → Fix (max 2 attempts) → Still fails? → Escalate
 ```
@@ -163,7 +163,7 @@ See [Parallel Execution Requirements](#phase-3-retrieve---mandatory-parallel-sea
 1. Identify claims requiring verification
 2. Cross-reference facts across 3+ independent sources
 3. Flag contradictions or uncertainties
-4. Assess source credibility (use source_evaluator.py, 0-100 scoring)
+4. Assess source credibility (use `${CLAUDE_PLUGIN_ROOT}/scripts/source_evaluator.py`, 0-100 scoring)
 5. Note consensus vs. debate areas
 6. Document verification status per claim
 
@@ -296,7 +296,7 @@ See [Report section](#5-report) below for progressive file assembly, HTML genera
 **Step 1: Citation Verification (Catches Fabricated Sources)**
 
 ```bash
-python scripts/verify_citations.py --report [path]
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/verify_citations.py --report [path]
 ```
 
 **Checks:**
@@ -312,7 +312,7 @@ python scripts/verify_citations.py --report [path]
 **Step 2: Structure & Quality Validation**
 
 ```bash
-python scripts/validate_report.py --report [path]
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/validate_report.py --report [path]
 ```
 
 **8 automated checks:**
@@ -747,7 +747,7 @@ When continuation agent starts:
 - Generate final content sections
 - Generate COMPLETE bibliography using ALL citations from state.citations.bibliography_entries
 - Read entire assembled report
-- Run validation: python scripts/validate_report.py --report [path]
+- Run validation: python3 ${CLAUDE_PLUGIN_ROOT}/scripts/validate_report.py --report [path]
 - Delete continuation_state.json (cleanup)
 - Report complete to user with metrics
 
@@ -756,39 +756,37 @@ Each agent generates manageable chunks (≤18K words), maintaining quality.
 Context preservation ensures coherence across continuation boundaries.
 
 **Generate HTML (Template by Research Type)**
-1. Select HTML template based on detected research type — see [research_types.md](./reference/research_types.md#html-templates-visual-presentation) for routing table
-2. Read the selected template file to understand structure and styling
-3. Set HTML language attribute: `<html lang="zh-CN">` for Chinese reports
-4. Generate complete HTML by:
-   - Reading the markdown report content
-   - **Converting markdown to HTML intelligently** (not mechanical replacement):
-     - Preserve semantic meaning and hierarchy
-     - Use appropriate HTML tags for different content types
-     - Handle tables, code blocks, lists with proper styling
-     - Apply template's CSS classes and styling
-   - **Fill template sections naturally**:
-     - Title: Extract from first # heading
-     - Date: Current date in YYYY-MM-DD format
-     - Source count: Count from bibliography
-     - Content: Convert markdown sections to styled HTML (in Chinese)
-     - Bibliography: Format citations with proper links
-5. **Style guidelines from template**:
-   - Follow the template's visual hierarchy
-   - Use template's color scheme and typography
-   - Apply appropriate CSS classes to elements
-   - Maintain template's layout structure
-6. Save to: `[folder]/research_report_[YYYYMMDD]_[slug].html`
-7. Open in browser: `open [html_path]`
 
-**Key principles for HTML generation**:
-- ✅ **Language**: Replace `<html lang="en">` with `<html lang="zh-CN">` and ensure all content is in Chinese
-- ✅ **Semantic HTML**: Use proper tags (`<section>`, `<article>`, `<figure>`, etc.)
-- ✅ **Beautiful tables**: Style with zebra striping, hover effects, proper headers
-- ✅ **Code blocks**: Use syntax highlighting styling, proper line wrapping
-- ✅ **Responsive design**: Ensure mobile-friendly layout
-- ✅ **Readable typography**: Good line height, font sizes, spacing suitable for Chinese
-- ✅ **No emojis**: Remove all emoji characters from final HTML
-- ❌ **No mechanical conversion**: Don't just replace patterns — understand context
+Use the `md_to_html.py` script to convert the markdown report to styled HTML:
+
+```bash
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/md_to_html.py [markdown_file] --open
+```
+
+The script automatically:
+1. Detects research type from `<!-- TYPE: xxx -->` comment in the markdown
+2. Selects the matching HTML template (see [research_types.md](./reference/research_types.md#html-templates-visual-presentation) for routing table)
+3. Extracts title, date, source count, metrics from the report
+4. Converts markdown to styled HTML with template CSS classes (section-title, subsection-title, data-table, citation, executive-summary, etc.)
+5. Formats bibliography entries with clickable links
+6. Builds a metrics dashboard (sources, sections, word count, mode, confidence)
+7. Sets `<html lang="zh-CN">` for Chinese content
+8. Removes emoji characters from final output
+9. Saves HTML file and opens it in browser (with `--open` flag)
+
+**Usage options:**
+- `--output/-o <path>`: Specify output file path (default: same name with .html extension)
+- `--open`: Open the HTML file in browser after conversion
+
+**Template routing** (automatic based on `<!-- TYPE: xxx -->` in markdown):
+| Type | Template |
+|------|----------|
+| `technical` | `technical_report_template.html` |
+| `comparison` | `comparison_report_template.html` |
+| `stock`, `market` | `mckinsey_report_template.html` |
+| `general`, `exploratory` | `general_report_template.html` |
+
+**Requirements:** Python 3 with `markdown` library (`pip install markdown`)
 
 **Generate PDF**
 1. Use Task tool with general-purpose agent
@@ -904,22 +902,6 @@ Every report must:
 - Debugging (use standard tools)
 - 1-2 search answers
 - Time-sensitive quick answers
-
----
-
-## Scripts (Offline, Python stdlib only)
-
-**Location:** `./scripts/`
-
-- **verify_citations.py** - Citation verification (DOI, URL validation)
-- **validate_report.py** - Quality validation (8 checks)
-- **citation_manager.py** - Citation tracking
-- **source_evaluator.py** - Credibility scoring (0-100)
-- **research_engine.py** - Research orchestration engine
-
-**No external dependencies required.**
-
-**Note:** HTML generation is handled directly by the AI model using type-specific templates, not by scripts.
 
 ---
 

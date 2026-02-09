@@ -1,23 +1,23 @@
-# Research Report: [Market/Industry Name]
+# 市场研究报告：[Market/Industry Name]
 
 <!-- TYPE: market -->
 <!-- Universal writing standards, citation rules, and progressive assembly strategy: see report_template.md -->
 <!-- This template defines SECTION STRUCTURE ONLY for market research reports -->
 
 <!-- GENERATION WORKFLOW (Market):
-1. Executive Summary → Write to file
-2. Market Definition & Scope → Edit/append
-3. Market Size & Growth → Edit/append
-4. Competitive Landscape → Edit/append
-5. Trends & Drivers → Edit/append
-6. Risks & Challenges → Edit/append
-7. Opportunities → Edit/append (if applicable)
-8. Strategic Recommendations → Edit/append
-9. Bibliography (ALL citations) → Edit/append
-10. Methodology → Edit/append
+1. 执行摘要 → Write to file
+2. 市场定义与范围 → Edit/append
+3. 市场规模与增长 → Edit/append
+4. 竞争格局 → Edit/append
+5. 趋势与驱动因素 → Edit/append
+6. 风险与挑战 → Edit/append
+7. 市场机会 → Edit/append (if applicable)
+8. 战略建议 → Edit/append
+9. 参考文献 (ALL citations) → Edit/append
+10. 附录：研究方法 → Edit/append
 -->
 
-## Executive Summary
+## 执行摘要
 
 [Write 3-5 bullet points, 50-250 words total]
 - **Market Size:** [Current size and projected growth with specific numbers]
@@ -25,17 +25,17 @@
 - **Competitive Insight:** [Market structure and dominant players]
 - **Opportunity/Risk:** [Primary opportunity or risk identified]
 
-**Primary Recommendation:** [One clear sentence on strategic action]
+**核心建议:** [One clear sentence on strategic action]
 
-**Confidence Level:** [High/Medium/Low with brief justification]
+**信心等级:** [High/Medium/Low with brief justification]
 
 ---
 
-## Market Definition & Scope
+## 市场定义与范围
 
 <!-- 400-600 words. Establish boundaries. -->
 
-### What Market Is Being Analyzed
+### 分析对象
 
 [2-3 paragraphs defining:]
 - Market boundaries and definition (what's in, what's out)
@@ -43,7 +43,7 @@
 - Adjacent markets and where boundaries are drawn
 - Value chain position (where in the chain this market sits)
 
-### Key Terms & Definitions
+### 关键术语
 
 [Clarify any industry-specific terminology that will be used throughout]
 
@@ -51,11 +51,11 @@
 
 ---
 
-## Market Size & Growth
+## 市场规模与增长
 
 <!-- 600-1,000 words. Quantitative core of market research. -->
 
-### Current Market Size
+### 当前市场规模
 
 [2-3 paragraphs with specific data:]
 - TAM (Total Addressable Market): $[X]B ([Year])
@@ -63,14 +63,14 @@
 - SOM (Serviceable Obtainable Market): $[X]M (if applicable)
 - Revenue breakdown by segment
 
-### Historical Growth
+### 历史增长
 
 [1-2 paragraphs on:]
 - Growth trajectory over past 3-5 years
 - Key inflection points and what caused them
 - CAGR with specific time periods
 
-### Projections & Forecasts
+### 预测与展望
 
 [2-3 paragraphs on:]
 - Projected market size ([Year]-[Year])
@@ -88,11 +88,11 @@
 
 ---
 
-## Competitive Landscape
+## 竞争格局
 
 <!-- 600-1,000 words. Who plays and how. -->
 
-### Key Players
+### 主要玩家
 
 [2-3 paragraphs covering top 5-10 players:]
 - Market share data (with source and year)
@@ -105,7 +105,7 @@
 | [Player 2] | [X]% | $[X]M | [Strength] | [Weakness] |
 | [Player 3] | [X]% | $[X]M | [Strength] | [Weakness] |
 
-### Competitive Dynamics
+### 竞争态势
 
 [2-3 paragraphs on:]
 - Market concentration (fragmented vs. consolidated)
@@ -113,7 +113,7 @@
 - Recent M&A activity, funding rounds, market entries/exits
 - Pricing dynamics and pressure
 
-### Emerging Challengers
+### 新兴挑战者
 
 [1-2 paragraphs on startups or new entrants disrupting the landscape]
 
@@ -121,26 +121,26 @@
 
 ---
 
-## Trends & Drivers
+## 趋势与驱动因素
 
 <!-- 500-800 words. What's shaping the market. -->
 
-### Primary Growth Drivers
+### 主要增长动力
 
 [2-3 paragraphs on factors fueling growth:]
 - Driver 1: [Specific trend with quantitative evidence]
 - Driver 2: [Specific trend with quantitative evidence]
 - Driver 3: [Specific trend with quantitative evidence]
 
-### Technology Shifts
+### 技术变革
 
 [1-2 paragraphs on technology changes affecting the market]
 
-### Regulatory & Policy Changes
+### 监管与政策变化
 
 [1-2 paragraphs on regulatory landscape and upcoming changes]
 
-### Consumer/Buyer Behavior Shifts
+### 消费者行为变化
 
 [1-2 paragraphs on how demand-side behavior is evolving]
 
@@ -148,11 +148,11 @@
 
 ---
 
-## Risks & Challenges
+## 风险与挑战
 
 <!-- 400-600 words. Honest risk assessment. -->
 
-### Market Risks
+### 市场风险
 
 [2-3 paragraphs covering:]
 - Macro risks (economic conditions, geopolitical factors)
@@ -160,7 +160,7 @@
 - Technology disruption risks
 - Supply chain or resource constraints
 
-### Barriers to Entry
+### 进入壁垒
 
 [1-2 paragraphs on:]
 - Capital requirements
@@ -168,7 +168,7 @@
 - Network effects and switching costs
 - Regulatory hurdles
 
-### Potential Disruption Scenarios
+### 潜在颠覆场景
 
 [1-2 paragraphs on what could fundamentally change the market]
 
@@ -176,21 +176,21 @@
 
 ---
 
-## Opportunities
+## 市场机会
 
 <!-- 300-500 words. OPTIONAL - include when evidence supports. -->
 
-### Underserved Segments
+### 未充分服务的细分市场
 
 [1-2 paragraphs identifying gaps in current market coverage]
 
-### Timing Windows
+### 时间窗口
 
 [1-2 paragraphs on time-sensitive opportunities:]
 - What's opening up and why now
 - How long the window is likely to last
 
-### White Space Analysis
+### 空白市场分析
 
 [1 paragraph on areas where no player has a strong position]
 
@@ -198,35 +198,35 @@
 
 ---
 
-## Strategic Recommendations
+## 战略建议
 
 <!-- 400-600 words. Actionable guidance. -->
 
-### For Market Entrants
+### 对新进入者
 
 [2-3 paragraphs with specific recommendations:]
 1. **[Action 1]:** [What, why, how]
 2. **[Action 2]:** [What, why, how]
 3. **[Action 3]:** [What, why, how]
 
-### For Existing Players
+### 对现有玩家
 
 [1-2 paragraphs on defensive and offensive strategies]
 
-### Key Metrics to Track
+### 关键跟踪指标
 
 [List of 5-7 leading indicators for this market:]
 1. [Metric]: [Why it matters, current value]
 2. [Metric]: [Why it matters, current value]
 3. [Continue...]
 
-### Further Research Needs
+### 待深入调查
 
 [3-5 specific questions that warrant deeper investigation]
 
 ---
 
-## Bibliography
+## 参考文献
 
 <!-- COMPLETE bibliography - EVERY citation used in report -->
 <!-- Format: [N] Author/Org (Year). "Title". Publication. URL (Retrieved: Date) -->
@@ -236,25 +236,25 @@
 
 ---
 
-## Appendix: Methodology
+## 附录：研究方法
 
-### Research Process
+### 研究过程
 
 [2-3 paragraphs describing research approach]
 
-### Sources Consulted
+### 来源概览
 
 **Total Sources:** [Number]
 **Source Types:** Industry reports: [N], News: [N], Financial filings: [N], Analyst reports: [N], Other: [N]
 
-### Verification Approach
+### 验证方法
 
 **Triangulation:** How market data was cross-referenced across sources
 **Credibility Assessment:** Source quality evaluation
 
 ---
 
-## Report Metadata
+## 报告元数据
 
 **Research Mode:** [Quick/Standard/Deep/UltraDeep]
 **Research Type:** Market

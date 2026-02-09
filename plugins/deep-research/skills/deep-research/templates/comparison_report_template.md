@@ -1,23 +1,23 @@
-# Research Report: [Option A] vs [Option B]
+# 对比研究报告：[Option A] vs [Option B]
 
 <!-- TYPE: comparison -->
 <!-- Universal writing standards, citation rules, and progressive assembly strategy: see report_template.md -->
 <!-- This template defines SECTION STRUCTURE ONLY for comparison research reports -->
 
 <!-- GENERATION WORKFLOW (Comparison):
-1. Executive Summary → Write to file
-2. Introduction & Comparison Criteria → Edit/append
-3. Option A Overview → Edit/append
-4. Option B Overview → Edit/append
-5. Head-to-Head Comparison → Edit/append
-6. Use Case Analysis → Edit/append
-7. Migration & Switching Costs → Edit/append (if applicable)
-8. Recommendation → Edit/append
-9. Bibliography (ALL citations) → Edit/append
-10. Methodology → Edit/append
+1. 执行摘要 → Write to file
+2. 引言与比较维度 → Edit/append
+3. 选项 A 概述 → Edit/append
+4. 选项 B 概述 → Edit/append
+5. 正面对比 → Edit/append
+6. 使用场景分析 → Edit/append
+7. 迁移与切换成本 → Edit/append (if applicable)
+8. 结论与建议 → Edit/append
+9. 参考文献 (ALL citations) → Edit/append
+10. 研究方法 → Edit/append
 -->
 
-## Executive Summary
+## 执行摘要
 
 [Write 3-5 bullet points, 50-250 words total]
 - **Verdict:** [One-sentence recommendation: which to choose under what conditions]
@@ -25,22 +25,22 @@
 - **Option B Strength:** [Primary advantage with specific data]
 - **Key Differentiator:** [The single most important factor for decision-making]
 
-**Confidence Level:** [High/Medium/Low with brief justification]
+**信心等级:** [High/Medium/Low with brief justification]
 
 ---
 
-## Introduction & Comparison Criteria
+## 引言与比较维度
 
 <!-- 400-600 words. Frame the comparison. -->
 
-### Why This Comparison Matters
+### 对比的意义
 
 [2-3 paragraphs explaining:]
 - Context: Why someone would need to choose between these options
 - Stakes: What depends on making the right choice
 - Common misconceptions or oversimplifications in the debate
 
-### Comparison Dimensions
+### 比较维度
 
 [Define the evaluation criteria explicitly:]
 
@@ -56,25 +56,25 @@
 
 ---
 
-## Option A: [Name] Overview
+## 选项 A：[Name] 概述
 
 <!-- 500-800 words. Standalone assessment of Option A. -->
 
-### What It Is
+### 定义与定位
 
 [2-3 paragraphs on:]
 - Core definition and purpose
 - History and current version/state
 - Target audience and design philosophy
 
-### Core Strengths
+### 核心优势
 
 [2-3 paragraphs with evidence:]
 - Strength 1: [Specific data, benchmarks, or user testimony]
 - Strength 2: [Specific data]
 - Strength 3: [Specific data]
 
-### Weaknesses & Trade-offs
+### 弱点与取舍
 
 [1-2 paragraphs:]
 - Known limitations with specific examples
@@ -84,25 +84,25 @@
 
 ---
 
-## Option B: [Name] Overview
+## 选项 B：[Name] 概述
 
 <!-- 500-800 words. Standalone assessment of Option B. -->
 
-### What It Is
+### 定义与定位
 
 [2-3 paragraphs on:]
 - Core definition and purpose
 - History and current version/state
 - Target audience and design philosophy
 
-### Core Strengths
+### 核心优势
 
 [2-3 paragraphs with evidence:]
 - Strength 1: [Specific data, benchmarks, or user testimony]
 - Strength 2: [Specific data]
 - Strength 3: [Specific data]
 
-### Weaknesses & Trade-offs
+### 弱点与取舍
 
 [1-2 paragraphs:]
 - Known limitations with specific examples
@@ -112,11 +112,11 @@
 
 ---
 
-## Head-to-Head Comparison
+## 正面对比
 
 <!-- 800-1,200 words. The core of a comparison report. -->
 
-### Feature Comparison
+### 功能对比
 
 | Feature | Option A | Option B | Winner |
 |---------|----------|----------|--------|
@@ -126,14 +126,14 @@
 | [Feature 4] | [Specific detail] | [Specific detail] | [A/B/Tie] |
 | [Feature 5] | [Specific detail] | [Specific detail] | [A/B/Tie] |
 
-### Performance Benchmarks
+### 性能基准
 
 [2-3 paragraphs with specific benchmark data:]
 - Benchmark methodology and conditions
 - Key metrics compared (latency, throughput, memory, bundle size, etc.)
 - Context for numbers (what's "good enough" for typical use cases)
 
-### Developer Experience
+### 开发者体验
 
 [2-3 paragraphs comparing:]
 - Learning curve and documentation
@@ -141,7 +141,7 @@
 - Error messages and developer ergonomics
 - Testing and deployment story
 
-### Community & Ecosystem
+### 社区与生态
 
 [1-2 paragraphs comparing:]
 - Community size and activity metrics
@@ -153,29 +153,29 @@
 
 ---
 
-## Use Case Analysis
+## 使用场景分析
 
 <!-- 500-800 words. Decision framework. -->
 
-### When to Choose Option A
+### 何时选择 A
 
 [2-3 paragraphs with specific scenarios:]
 - Scenario 1: [Description, why A wins here]
 - Scenario 2: [Description, why A wins here]
 - Ideal team profile for A
 
-### When to Choose Option B
+### 何时选择 B
 
 [2-3 paragraphs with specific scenarios:]
 - Scenario 1: [Description, why B wins here]
 - Scenario 2: [Description, why B wins here]
 - Ideal team profile for B
 
-### When Either Works
+### 均可适用的场景
 
 [1 paragraph on scenarios where the choice doesn't matter much]
 
-### Decision Flowchart
+### 决策流程
 
 ```
 Start
@@ -190,22 +190,22 @@ Start
 
 ---
 
-## Migration & Switching Costs
+## 迁移与切换成本
 
 <!-- 300-500 words. OPTIONAL - include if relevant. -->
 
-### A → B Migration
+### A → B 迁移
 
 [1-2 paragraphs on:]
 - Effort estimate and typical pain points
 - Available migration tools or guides
 - What can't be directly migrated
 
-### B → A Migration
+### B → A 迁移
 
 [1-2 paragraphs on same aspects]
 
-### Lock-in Risks
+### 锁定风险
 
 [1 paragraph on vendor/technology lock-in considerations for each option]
 
@@ -213,23 +213,23 @@ Start
 
 ---
 
-## Recommendation
+## 结论与建议
 
 <!-- 400-600 words. Clear, opinionated conclusion. -->
 
-### Verdict
+### 结论
 
 **[Option A / Option B / "It Depends"]** — [Clear rationale in 2-3 sentences]
 
-### For Most Teams
+### 对多数团队的建议
 
 [2 paragraphs explaining the default recommendation and reasoning]
 
-### Exceptions
+### 例外情况
 
 [1-2 paragraphs on when the opposite choice makes sense]
 
-### Key Factors to Reassess
+### 需要重新评估的关键因素
 
 [3-5 specific triggers that would change the recommendation:]
 1. If [condition], reconsider [option]
@@ -238,7 +238,7 @@ Start
 
 ---
 
-## Bibliography
+## 参考文献
 
 <!-- COMPLETE bibliography - EVERY citation used in report -->
 <!-- Format: [N] Author/Org (Year). "Title". Publication. URL (Retrieved: Date) -->
@@ -248,25 +248,25 @@ Start
 
 ---
 
-## Appendix: Methodology
+## 附录：研究方法
 
-### Research Process
+### 研究过程
 
 [2-3 paragraphs describing research approach]
 
-### Sources Consulted
+### 来源概览
 
 **Total Sources:** [Number]
 **Source Types:** Documentation: [N], Benchmarks: [N], Blog posts: [N], GitHub: [N], Other: [N]
 
-### Verification Approach
+### 验证方法
 
 **Triangulation:** How claims were verified across multiple sources
 **Benchmark Validation:** How performance claims were cross-checked
 
 ---
 
-## Report Metadata
+## 报告元数据
 
 **Research Mode:** [Quick/Standard/Deep/UltraDeep]
 **Research Type:** Comparison
