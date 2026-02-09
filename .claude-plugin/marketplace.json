@@ -5,13 +5,13 @@
     "email": "qso@users.noreply.github.com"
   },
   "metadata": {
-    "description": "QSO's collection of high-quality plugins for AI-powered presentations and more",
-    "version": "1.0.0"
+    "description": "QSO's collection of high-quality plugins for AI-powered presentations, deep research, and Volcengine AI capabilities",
+    "version": "1.1.0"
   },
   "plugins": [
     {
       "name": "nanobanana-ppt",
-      "description": "Generate professional PPT presentations using Google Nano Banana Pro AI via MCP. Supports multiple visual styles, fine-grained page allocation, and dynamic style system.",
+      "description": "Generate professional PPT presentations using Google Nano Banana Pro AI via MCP. Supports multiple visual styles, fine-grained page allocation, and plugin-style dynamic style system.",
       "version": "2.0.0",
       "source": "./plugins/nanobanana-ppt",
       "keywords": [
@@ -19,11 +19,56 @@
         "presentation",
         "slides",
         "image-generation",
-        "mcp",
-        "nano-banana",
-        "gemini",
-        "ai",
-        "design"
+        "nanobanana"
+      ],
+      "license": "MIT",
+      "author": {
+        "name": "qso",
+        "url": "https://github.com/qso"
+      },
+      "homepage": "https://github.com/qso/claude-plugins-qso",
+      "repository": "https://github.com/qso/claude-plugins-qso.git"
+    },
+    {
+      "name": "deep-research",
+      "description": "Conduct enterprise-grade research with multi-source synthesis, citation tracking, and verification. Supports 8-phase research pipeline with source credibility scoring and parallel retrieval.",
+      "version": "1.0.0",
+      "source": "./plugins/deep-research",
+      "keywords": [
+        "research",
+        "调研",
+        "研究",
+        "deep-research",
+        "citation",
+        "compare",
+        "verification",
+        "web-search",
+        "analysis",
+        "report"
+      ],
+      "license": "MIT",
+      "author": {
+        "name": "qso",
+        "url": "https://github.com/qso"
+      },
+      "homepage": "https://github.com/qso/claude-plugins-qso",
+      "repository": "https://github.com/qso/claude-plugins-qso.git"
+    },
+    {
+      "name": "volengine-skills",
+      "description": "Multi-skill plugin integrating Volcengine AI capabilities. Currently includes ASR (Automatic Speech Recognition) for audio-to-text transcription with support for multiple languages and speakers.",
+      "version": "1.0.0",
+      "source": "./plugins/volengine-skills",
+      "keywords": [
+        "volcengine",
+        "byte-dance",
+        "asr",
+        "speech-recognition",
+        "transcription",
+        "voice-to-text",
+        "multi-skill",
+        "translation",
+        "tts"
       ],
       "license": "MIT",
       "author": {

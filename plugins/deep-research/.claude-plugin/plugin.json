@@ -1,0 +1,24 @@
+{
+  "name": "deep-research",
+  "version": "1.0.0",
+  "description": "Conduct enterprise-grade research with multi-source synthesis, citation tracking, and verification. Supports 8-phase research pipeline with source credibility scoring and parallel retrieval.",
+  "author": {
+    "name": "qso",
+    "url": "https://github.com/qso"
+  },
+  "homepage": "https://github.com/qso/claude-plugins-qso",
+  "repository": "https://github.com/qso/claude-plugins-qso.git",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "调研",
+    "研究",
+    "deep-research",
+    "citation",
+    "compare",
+    "verification",
+    "web-search",
+    "analysis",
+    "report"
+  ]
+}
