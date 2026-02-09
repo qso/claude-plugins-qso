@@ -292,9 +292,13 @@ def build_metrics_dashboard(md_content: str, research_type: str) -> str:
     ]
 
     if confidence:
-        # Strip leftover markdown bold markers and truncate long text
+        # Strip leftover markdown bold markers, then extract just the level keyword
         conf_short = confidence.strip("* ")
-        conf_short = conf_short.split("（")[0].split("(")[0].strip()
+        # Split on common separators: （ ( — – – , ， : ：
+        conf_short = re.split(r"[（(—–\-,，:：]", conf_short)[0].strip()
+        # Final safety: cap at 10 chars to prevent dashboard overflow
+        if len(conf_short) > 10:
+            conf_short = conf_short[:10]
         metrics.append(("Confidence", conf_short))
 
     metric_html_parts = []
