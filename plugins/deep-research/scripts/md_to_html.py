@@ -25,9 +25,12 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-import markdown
-from markdown.extensions.tables import TableExtension
-from markdown.extensions.fenced_code import FencedCodeExtension
+try:
+    import markdown
+except ImportError:
+    print("Installing required dependency: markdown...")
+    subprocess.check_call([sys.executable, "-m", "pip", "install", "markdown", "-q"])
+    import markdown
 
 
 # Template routing: research type -> HTML template filename
