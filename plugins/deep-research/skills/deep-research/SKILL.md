@@ -101,6 +101,18 @@ Validation Gate
 - Example: "启动标准模式研究，类型: technical (5-10 分钟, 15-30 个来源, 输出语言: 中文)"
 - Proceed without waiting for approval
 
+**Initialize project folder (BEFORE Phase 3):**
+```bash
+# Extract topic slug and create folder
+topic_slug="[clean_topic_name]"  # e.g., "openclaw", "react_vs_vue"
+date_str=$(date +%Y%m%d)
+folder_name="${topic_slug}_Research_${date_str}"
+project_folder="${CLAUDE_PROJECT_DIR}/${folder_name}"
+mkdir -p "${project_folder}"
+mkdir -p "${project_folder}/reference"  # For saving valuable sources
+echo "Project folder: ${project_folder}"
+```
+
 ---
 
 ### 3. Act (Phase Execution)
@@ -241,94 +253,41 @@ See [Report section](#5-report) below for progressive file assembly, HTML genera
 
 **Phase 3 RETRIEVE - Mandatory Parallel Search:**
 
-**8 Canonical Search Angles** (use all 8 for `general` type; filter by [research types](./reference/research_types.md#search-angles-per-type) for other types):
-1. **Core topic** (semantic) — meaning-based exploration of main concept
-2. **Technical details** (keyword) — specific terms, APIs, implementations
-3. **Recent developments** (date-filtered) — what's new in 2024-2025
-4. **Academic sources** (domain-specific) — papers, research, formal analysis
-5. **Alternative perspectives** (comparison) — competing approaches, criticisms
-6. **Statistical/data sources** — quantitative evidence, metrics, benchmarks
-7. **Industry analysis** — commercial applications, market trends
-8. **Critical analysis/limitations** — known problems, failure modes, edge cases
+**8 Canonical Search Angles** (filter by type per [research_types.md](./reference/research_types.md#search-angles-per-type)):
+1. Core topic (semantic)
+2. Technical details (keyword)
+3. Recent developments (2024-2026)
+4. Academic sources
+5. Alternative perspectives
+6. Statistical/data sources
+7. Industry analysis
+8. Critical analysis/limitations
 
-**Search Tools (Multi-Engine Parallel Strategy):**
-
-Always available:
-- **WebSearch** — Built-in web search. Use for broad queries, news, general topics.
-- **WebFetch** — Fetch and read specific URLs. Use for known authoritative sources.
-
-Exa MCP tools (available when `EXA_API_KEY` is set — check if Exa tools exist before using):
-- **web_search_exa** — Exa neural search. Better at semantic/conceptual queries than keyword search. Use alongside WebSearch for the same angle to get diverse results.
-- **web_search_advanced_exa** — Advanced search with domain filtering, date ranges, and content type control. Use for targeted searches (e.g., site:arxiv.org, date range 2024-2025).
-- **get_code_context_exa** — Code-aware search across GitHub, Stack Overflow, docs. **Prioritize for `technical` type research.**
-- **company_research_exa** — Company intelligence search. **Prioritize for `market` and `stock` type research.**
-- **crawling_exa** — Full page content extraction from a known URL. Use after finding important URLs to get complete text.
+**Search Tools:**
+- Always: **WebSearch**, **WebFetch**
+- Exa MCP (if EXA_API_KEY set): `web_search_exa`, `web_search_advanced_exa`, `get_code_context_exa`, `company_research_exa`, `crawling_exa`
 
 **Execution Steps:**
-1. **Filter angles by research type** → use type-specific preferred/optional angles
-2. **Decompose query** into 5-10 independent search queries before ANY searches
-3. **Assign each query to optimal tool(s):**
-   - Broad/news queries → WebSearch
-   - Semantic/conceptual queries → web_search_exa (if available) + WebSearch
-   - Code/technical queries → get_code_context_exa (if available) + WebSearch
-   - Company/market queries → company_research_exa (if available) + WebSearch
-   - Date-filtered queries → web_search_advanced_exa (if available) or WebSearch
-   - Known authoritative URLs → WebFetch or crawling_exa
-4. **Launch ALL searches in single message** with multiple tool calls (NOT sequential)
-   - Mix WebSearch + Exa tools in the same parallel batch for maximum coverage
-   - Each query can go to multiple tools simultaneously (e.g., WebSearch + web_search_exa for the same topic)
-5. **Quality threshold monitoring** — First Finish Search (FFS) pattern:
-   - **Quick:** 10+ sources, avg credibility >60/100 OR 2 min elapsed
-   - **Standard:** 15+ sources, avg credibility >60/100 OR 5 min elapsed
-   - **Deep:** 25+ sources, avg credibility >70/100 OR 10 min elapsed
-   - **UltraDeep:** 30+ sources, avg credibility >75/100 OR 15 min elapsed
-   - When threshold reached: proceed to Phase 4; continue remaining searches in background
-6. **Spawn 3-5 parallel agents** using Task tool for deep-dive investigations
+1. Filter angles by research type
+2. Decompose into 5-10 independent queries
+3. Assign to optimal tools (WebSearch + Exa for same angle = diverse results)
+4. **Launch ALL in single message** (parallel, NOT sequential)
+5. Monitor quality thresholds:
+   - Quick: 10+ sources, >60/100 OR 2min
+   - Standard: 15+ sources, >60/100 OR 5min
+   - Deep: 25+ sources, >70/100 OR 10min
+   - UltraDeep: 30+ sources, >75/100 OR 15min
+6. Spawn 3-5 parallel agents for deep-dives
+7. **Save valuable sources** to `${project_folder}/reference/`:
+   - For sources with credibility >70/100, use `mcp__web_reader__webReader` to fetch full content
+   - Save as `reference/[N]_[slug].md` with title, URL, credibility, content, key insights
+   - These will be loaded in Phase 8.0 for detailed report generation
 
-**Source Diversity Requirements:**
-- Minimum 3 source types (academic, industry, news, technical docs)
-- Temporal diversity (recent 2024-2025 + foundational older sources)
-- Perspective diversity (proponents + critics + neutral analysis)
-- Score each source 0-100 using source_evaluator.py; flag <40 for extra verification
-
-**Example correct execution (technical type, "Bun runtime"):**
-```
-[Single message with 10+ parallel tool calls]
-WebSearch #1: "Bun runtime overview what is it"
-WebSearch #2: "Bun performance benchmarks 2024 2025"
-WebSearch #3: "Bun limitations issues problems"
-web_search_exa #1: "Bun runtime architecture internals design" (semantic)
-web_search_advanced_exa #1: "Bun" domain:github.com,oven.sh date:2024-2025
-get_code_context_exa #1: "Bun runtime API examples getting started"
-get_code_context_exa #2: "Bun vs Node.js compatibility differences"
-WebFetch #1: https://bun.sh/docs (official docs)
-Task agent #1: Academic paper analysis on JS runtimes
-Task agent #2: Community sentiment deep dive (Reddit, HN, Discord)
-```
-
-**Example correct execution (stock type, "NVDA analysis"):**
-```
-[Single message with 10+ parallel tool calls]
-WebSearch #1: "NVIDIA NVDA stock analysis 2025"
-WebSearch #2: "NVIDIA earnings Q4 2024 results guidance"
-WebSearch #3: "NVIDIA bear case risks 2025"
-web_search_exa #1: "NVIDIA competitive moat AI chip market position" (semantic)
-web_search_advanced_exa #1: "NVIDIA" domain:sec.gov,finance.yahoo.com date:2024-2025
-company_research_exa #1: "NVIDIA Corporation" (company intelligence)
-WebSearch #4: "NVIDIA valuation PE ratio vs AMD Intel"
-Task agent #1: Financial filings deep dive
-Task agent #2: Industry analysis - AI chip market landscape
-```
-
-**❌ WRONG (sequential, single-engine):**
-```
-WebSearch #1 → wait for results → WebSearch #2 → wait → WebSearch #3...
-```
-
-**✅ RIGHT (parallel, multi-engine):**
-```
-All WebSearch + Exa + Task agents launched simultaneously in one message
-```
+**Requirements:**
+- Minimum 3 source types (academic, industry, news, docs)
+- Temporal diversity (recent + foundational)
+- Perspective diversity (proponents + critics + neutral)
+- Score sources 0-100; flag <40 for extra verification
 
 ---
 
@@ -379,40 +338,57 @@ python scripts/validate_report.py --report [path]
 
 **File Organization (CRITICAL - Clean Accessibility):**
 
-**1. Create Organized Folder in Project Directory:**
-- ALWAYS create dedicated folder: `${CLAUDE_PROJECT_DIR}/[TopicName]_Research_[YYYYMMDD]/`
-- Extract clean topic name from research question (remove special chars, use underscores/CamelCase)
-- Examples:
-  - "psilocybin research 2025" → `${CLAUDE_PROJECT_DIR}/Psilocybin_Research_20251104/`
-  - "compare React vs Vue" → `${CLAUDE_PROJECT_DIR}/React_vs_Vue_Research_20251104/`
-  - "AI safety trends" → `${CLAUDE_PROJECT_DIR}/AI_Safety_Trends_Research_20251104/`
-- If folder exists, use it; if not, create it
-- This ensures clean organization and easy accessibility
+**Directory Structure:**
+```
+${CLAUDE_PROJECT_DIR}/                          # Claude Code 运行目录（当前项目）
+└── ${project_folder}/                         # = ${CLAUDE_PROJECT_DIR}/${topic_slug}_Research_${date}/
+    ├── research_report_${date}_${slug}.md     # Markdown 报告
+    ├── research_report_${date}_${slug}.html   # HTML 报告
+    ├── research_report_${date}_${slug}.pdf    # PDF 报告（可选）
+    └── reference/                             # 参考资料（Phase 3 保存）
+        ├── 001_source_title.md
+        ├── 002_source_title.md
+        └── ...
+```
+
+**Where variables are defined:**
+- `${CLAUDE_PROJECT_DIR}` = Claude Code 当前运行目录
+- `${topic_slug}` = 从研究问题提取的简洁名称（如 "openclaw", "react_vs_vue"）
+- `${date}` = YYYYMMDD 格式日期
+- `${project_folder}` = `${CLAUDE_PROJECT_DIR}/${topic_slug}_Research_${date}/`（在 Phase 2 初始化）
 
 **2. Save All Formats to Same Folder:**
 
 **Markdown (Primary Source):**
-- Save to: `[Project folder]/research_report_[YYYYMMDD]_[topic_slug].md`
-- Also save copy to: `~/.claude/research_output/` (internal tracking)
+- Save to: `${project_folder}/research_report_[YYYYMMDD]_[topic_slug].md`
 - Full detailed report with all findings
 
 **HTML (ALWAYS GENERATE - Template by Research Type):**
-- Save to: `[Project folder]/research_report_[YYYYMMDD]_[topic_slug].html`
+- Save to: `${project_folder}/research_report_[YYYYMMDD]_[topic_slug].html`
 - **Select HTML template based on research type** — see [research_types.md](./reference/research_types.md#html-templates-visual-presentation) for routing table
 - OPEN in browser automatically after generation
 
 **PDF (OPTIONAL - Only when user explicitly requests):**
-- Save to: `[Project folder]/research_report_[YYYYMMDD]_[topic_slug].pdf`
+- Save to: `${project_folder}/research_report_[YYYYMMDD]_[topic_slug].pdf`
 - Use generating-pdf skill (via Task tool with general-purpose agent)
 - Professional formatting with headers, page numbers
 - OPEN in default PDF viewer after generation
 - **Do NOT generate PDF unless the user asks for it**
+
+**Reference Materials (Phase 3 - During Research):**
+- Folder created in Phase 2: `${project_folder}/reference/`
+- Save valuable sources (credibility >70/100) as `reference/[N]_[slug].md`
+- Include: title, URL, credibility score, full content, key insights
+- **Purpose**: Preserve important details without bloating research context
+- **Usage**: Load during Phase 8.0 before report generation
 
 **3. File Naming Convention:**
 All files use same base name for easy matching:
 - `research_report_20251104_psilocybin_2025.md`
 - `research_report_20251104_psilocybin_2025.html`
 - `research_report_20251104_psilocybin_2025.pdf` (only if user requests PDF)
+- `reference/001_openclaw_architecture.md` (reference materials)
+- `reference/002_performance_benchmarks.md` (reference materials)
 
 **Length Requirements (UNLIMITED with Progressive Assembly):**
 - Quick mode: 2,000+ words (baseline quality threshold)
@@ -479,7 +455,7 @@ Before considering a section complete, verify:
 
 **Deliver to user:**
 1. Executive summary (inline in chat)
-2. Organized folder path (e.g., "All files saved to: ${CLAUDE_PROJECT_DIR}/Psilocybin_Research_20251104/")
+2. Organized folder path (e.g., "All files saved to: ${project_folder}")
 3. Confirmation of formats generated:
    - Markdown (source)
    - HTML (type-specific template, opened in browser)
@@ -489,14 +465,36 @@ Before considering a section complete, verify:
 
 **Generation Workflow: Progressive File Assembly (Unlimited Length)**
 
+**Phase 8.0: Load Reference Materials (CRITICAL)**
+
+Before generating the report, load all saved reference materials for detailed context:
+
+```bash
+# Reference folder was created in Phase 2: ${project_folder}/reference/
+# Load all saved reference files
+ls -1 "${project_folder}/reference/"*.md 2>/dev/null || echo "No reference files found"
+```
+
+**Loading strategy:**
+- Read all reference markdown files in `${project_folder}/reference/`
+- Extract key insights, statistics, and important details
+- Cross-reference with citation numbers used in the research
+- Use this detailed context to enrich report content with specific evidence
+- This avoids context bloat during research while preserving important details
+
+**What to extract from each reference:**
+1. Key quantitative data and statistics
+2. Important technical details or specifications
+3. Direct quotes and evidence
+4. Methodology information
+5. Comparison data
+6. Limitations or caveats mentioned
+
 **Phase 8.1: Setup**
 ```bash
-# Extract topic slug from research question
-# Create folder: ${CLAUDE_PROJECT_DIR}/[TopicName]_Research_[YYYYMMDD]/
-mkdir -p "${CLAUDE_PROJECT_DIR}/[folder_name]"
-
+# Reference folder already created in Phase 2
 # Create initial markdown file with frontmatter
-# File path: [folder]/research_report_[YYYYMMDD]_[slug].md
+# File path: ${project_folder}/research_report_[YYYYMMDD]_[slug].md
 ```
 
 **Phase 8.2: Progressive Section Generation**
