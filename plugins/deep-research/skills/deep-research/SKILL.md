@@ -13,6 +13,11 @@ description: Conduct enterprise-grade research with multi-source synthesis, cita
 
 **Purpose:** Deliver citation-backed, verified research reports through 8-phase pipeline (Scope → Plan → Retrieve → Triangulate → Synthesize → Critique → Refine → Package) with source credibility scoring and progressive context management.
 
+**Language Default:** **Chinese (Simplified)**. All reports, summaries, and outputs should be in Chinese by default. Only switch to English if:
+- User explicitly requests English output
+- Research topic is exclusively English-language content with Chinese readership
+- Technical terms are more appropriate in English
+
 **Context Strategy:** This skill uses 2025 context engineering best practices:
 - Static instructions cached (this section)
 - Progressive disclosure (load references only when needed)
@@ -72,6 +77,7 @@ Validation Gate
 **When in doubt: PROCEED with standard mode. User will redirect if incorrect.**
 
 **Default assumptions:**
+- **Language**: Chinese (Simplified) for all reports, unless user requests English
 - Technical query → Assume technical audience, type: `technical`
 - Comparison query ("vs", "compare") → Assume balanced perspective, type: `comparison`
 - Market/business query → Assume business audience, type: `market`
@@ -91,8 +97,8 @@ Validation Gate
 - **UltraDeep** (20-45 min): Critical analysis, maximum rigor
 
 **Announce plan and execute:**
-- Briefly state: selected mode, detected type, estimated time, number of sources
-- Example: "Starting standard mode research, type: technical (5-10 min, 15-30 sources)"
+- Briefly state: selected mode, detected type, estimated time, number of sources, language
+- Example: "启动标准模式研究，类型: technical (5-10 分钟, 15-30 个来源, 输出语言: 中文)"
 - Proceed without waiting for approval
 
 ---
@@ -373,30 +379,30 @@ python scripts/validate_report.py --report [path]
 
 **File Organization (CRITICAL - Clean Accessibility):**
 
-**1. Create Organized Folder in Documents:**
-- ALWAYS create dedicated folder: `~/Documents/[TopicName]_Research_[YYYYMMDD]/`
+**1. Create Organized Folder in Project Directory:**
+- ALWAYS create dedicated folder: `${CLAUDE_PROJECT_DIR}/[TopicName]_Research_[YYYYMMDD]/`
 - Extract clean topic name from research question (remove special chars, use underscores/CamelCase)
 - Examples:
-  - "psilocybin research 2025" → `~/Documents/Psilocybin_Research_20251104/`
-  - "compare React vs Vue" → `~/Documents/React_vs_Vue_Research_20251104/`
-  - "AI safety trends" → `~/Documents/AI_Safety_Trends_Research_20251104/`
+  - "psilocybin research 2025" → `${CLAUDE_PROJECT_DIR}/Psilocybin_Research_20251104/`
+  - "compare React vs Vue" → `${CLAUDE_PROJECT_DIR}/React_vs_Vue_Research_20251104/`
+  - "AI safety trends" → `${CLAUDE_PROJECT_DIR}/AI_Safety_Trends_Research_20251104/`
 - If folder exists, use it; if not, create it
 - This ensures clean organization and easy accessibility
 
 **2. Save All Formats to Same Folder:**
 
 **Markdown (Primary Source):**
-- Save to: `[Documents folder]/research_report_[YYYYMMDD]_[topic_slug].md`
+- Save to: `[Project folder]/research_report_[YYYYMMDD]_[topic_slug].md`
 - Also save copy to: `~/.claude/research_output/` (internal tracking)
 - Full detailed report with all findings
 
 **HTML (ALWAYS GENERATE - Template by Research Type):**
-- Save to: `[Documents folder]/research_report_[YYYYMMDD]_[topic_slug].html`
+- Save to: `[Project folder]/research_report_[YYYYMMDD]_[topic_slug].html`
 - **Select HTML template based on research type** — see [research_types.md](./reference/research_types.md#html-templates-visual-presentation) for routing table
 - OPEN in browser automatically after generation
 
 **PDF (OPTIONAL - Only when user explicitly requests):**
-- Save to: `[Documents folder]/research_report_[YYYYMMDD]_[topic_slug].pdf`
+- Save to: `[Project folder]/research_report_[YYYYMMDD]_[topic_slug].pdf`
 - Use generating-pdf skill (via Task tool with general-purpose agent)
 - Professional formatting with headers, page numbers
 - OPEN in default PDF viewer after generation
@@ -420,6 +426,7 @@ Each section is written to file immediately (avoiding output token limits).
 Complex topics with many findings? Generate 20, 30, 50+ findings - no constraint!
 
 **Content Requirements:**
+- **Language:** Write reports in **Chinese (Simplified)** by default. Use English only if user explicitly requests or for technical terms without good Chinese equivalents.
 - **Report structure by type:** Load the type-specific MD template per [research_types.md](./reference/research_types.md#template-routing) routing table
 - Bibliography and Methodology sections are always required regardless of type
 - Generate each section to APPROPRIATE depth (determined by evidence, not word targets)
@@ -429,10 +436,11 @@ Complex topics with many findings? Generate 20, 30, 50+ findings - no constraint
 - DO NOT write summaries - write FULL analysis
 
 **Writing Standards:**
+- **Language**: Write in Chinese (Simplified) with professional, clear prose. Use appropriate technical terms in English when needed.
 - **Narrative-driven**: Write in flowing prose. Each finding tells a story with beginning (context), middle (evidence), end (implications)
 - **Precision**: Every word deliberately chosen, carries intention
 - **Economy**: No fluff, eliminate fancy grammar, unnecessary modifiers
-- **Clarity**: Exact numbers embedded in sentences ("The study demonstrated a 23% reduction in mortality"), not isolated in bullets
+- **Clarity**: Exact numbers embedded in sentences ("研究显示死亡率降低了 23%"), not isolated in bullets
 - **Directness**: State findings without embellishment
 - **High signal-to-noise**: Dense information, respect reader's time
 
@@ -440,7 +448,7 @@ Complex topics with many findings? Generate 20, 30, 50+ findings - no constraint
 - Use bullets SPARINGLY: Only for distinct lists (product names, company roster, enumerated steps)
 - NEVER use bullets as primary content delivery - they fragment thinking
 - Each findings section requires substantive prose paragraphs (3-5+ paragraphs minimum)
-- Example: Instead of "• Market size: $2.4B" write "The global market reached $2.4 billion in 2023, driven by increasing consumer demand and regulatory tailwinds [1]."
+- Example: Instead of "• 市场规模: $2.4B" write "2023 年全球市场规模达到 24 亿美元，受消费者需求增长和监管政策推动 [1]."
 
 **Anti-Fatigue Quality Check (Apply to EVERY Section):**
 Before considering a section complete, verify:
@@ -454,24 +462,24 @@ Before considering a section complete, verify:
 
 **Source Attribution Standards (Critical for Preventing Fabrication):**
 - **Immediate citation**: Every factual claim followed by [N] citation in same sentence
-- **Quote sources directly**: Use "According to [1]..." or "[1] reports..." for factual statements
+- **Quote sources directly**: Use "根据 [1]..." or "[1] 报道..." for factual statements
 - **Distinguish fact from synthesis**:
-  - ✅ GOOD: "Mortality decreased 23% (p<0.01) in the treatment group [1]."
-  - ❌ BAD: "Studies show mortality improved significantly."
+  - ✅ GOOD: "治疗组死亡率降低 23%（p<0.01）[1]."
+  - ❌ BAD: "研究表明死亡率显著改善。"
 - **No vague attributions**:
-  - ❌ NEVER: "Research suggests...", "Studies show...", "Experts believe..."
-  - ✅ ALWAYS: "Smith et al. (2024) found..." [1], "According to FDA data..." [2]
+  - ❌ NEVER: "研究表明...", "研究显示...", "专家认为..."
+  - ✅ ALWAYS: "Smith 等人 (2024) 发现..." [1], "根据 FDA 数据..." [2]
 - **Label speculation explicitly**:
-  - ✅ GOOD: "This suggests a potential mechanism..." (analysis, not fact)
-  - ❌ BAD: "The mechanism is..." (presented as fact without citation)
+  - ✅ GOOD: "这提示了一种潜在机制..." (analysis, not fact)
+  - ❌ BAD: "该机制是..." (presented as fact without citation)
 - **Admit uncertainty**:
-  - ✅ GOOD: "No sources found addressing X directly."
+  - ✅ GOOD: "未找到直接讨论 X 的来源。"
   - ❌ BAD: Fabricating a citation to fill the gap
-- **Template pattern**: "[Specific claim with numbers/data] [Citation]. [Analysis/implication]."
+- **Template pattern**: "[具体声明和数据] [引用]. [分析/影响]."
 
 **Deliver to user:**
 1. Executive summary (inline in chat)
-2. Organized folder path (e.g., "All files saved to: ~/Documents/Psilocybin_Research_20251104/")
+2. Organized folder path (e.g., "All files saved to: ${CLAUDE_PROJECT_DIR}/Psilocybin_Research_20251104/")
 3. Confirmation of formats generated:
    - Markdown (source)
    - HTML (type-specific template, opened in browser)
@@ -484,8 +492,8 @@ Before considering a section complete, verify:
 **Phase 8.1: Setup**
 ```bash
 # Extract topic slug from research question
-# Create folder: ~/Documents/[TopicName]_Research_[YYYYMMDD]/
-mkdir -p ~/Documents/[folder_name]
+# Create folder: ${CLAUDE_PROJECT_DIR}/[TopicName]_Research_[YYYYMMDD]/
+mkdir -p "${CLAUDE_PROJECT_DIR}/[folder_name]"
 
 # Create initial markdown file with frontmatter
 # File path: [folder]/research_report_[YYYYMMDD]_[slug].md
@@ -751,63 +759,38 @@ Context preservation ensures coherence across continuation boundaries.
 
 **Generate HTML (Template by Research Type)**
 1. Select HTML template based on detected research type — see [research_types.md](./reference/research_types.md#html-templates-visual-presentation) for routing table
-2. Read the selected template file
-3. Extract 3-4 key quantitative metrics from findings for dashboard
-4. **Use Python script for MD to HTML conversion:**
+2. Read the selected template file to understand structure and styling
+3. Set HTML language attribute: `<html lang="zh-CN">` for Chinese reports
+4. Generate complete HTML by:
+   - Reading the markdown report content
+   - **Converting markdown to HTML intelligently** (not mechanical replacement):
+     - Preserve semantic meaning and hierarchy
+     - Use appropriate HTML tags for different content types
+     - Handle tables, code blocks, lists with proper styling
+     - Apply template's CSS classes and styling
+   - **Fill template sections naturally**:
+     - Title: Extract from first # heading
+     - Date: Current date in YYYY-MM-DD format
+     - Source count: Count from bibliography
+     - Content: Convert markdown sections to styled HTML (in Chinese)
+     - Bibliography: Format citations with proper links
+5. **Style guidelines from template**:
+   - Follow the template's visual hierarchy
+   - Use template's color scheme and typography
+   - Apply appropriate CSS classes to elements
+   - Maintain template's layout structure
+6. Save to: `[folder]/research_report_[YYYYMMDD]_[slug].html`
+7. Open in browser: `open [html_path]`
 
-   ```bash
-   cd ${CLAUDE_PLUGIN_ROOT}/skills/deep-research
-   python scripts/md_to_html.py [markdown_report_path]
-   ```
-
-   The script returns two parts:
-   - **Part A ({{CONTENT}}):** All sections except Bibliography, properly converted to HTML
-   - **Part B ({{BIBLIOGRAPHY}}):** Bibliography section only, formatted as HTML
-
-   **CRITICAL:** The script handles ALL conversion automatically:
-   - Headers: ## → `<div class="section"><h2 class="section-title">`, ### → `<h3 class="subsection-title">`
-   - Lists: Markdown bullets → `<ul><li>` with proper nesting
-   - Tables: Markdown tables → `<table>` with thead/tbody
-   - Paragraphs: Text wrapped in `<p>` tags
-   - Bold/italic: **text** → `<strong>`, *text* → `<em>`
-   - Citations: [N] preserved for tooltip conversion in step 5
-
-5. **Add Citation Tooltips (Attribution Gradients):**
-   For each [N] citation in {{CONTENT}} (not bibliography), optionally add interactive tooltips:
-   ```html
-   <span class="citation">[N]
-     <span class="citation-tooltip">
-       <div class="tooltip-title">[Source Title]</div>
-       <div class="tooltip-source">[Author/Publisher]</div>
-       <div class="tooltip-claim">
-         <div class="tooltip-claim-label">Supports Claim:</div>
-         [Extract sentence with this citation]
-       </div>
-     </span>
-   </span>
-   ```
-   NOTE: This step is optional for speed. Basic [N] citations are sufficient.
-
-6. Replace placeholders in selected template:
-   - {{TITLE}} - Report title (extract from first ## heading in MD)
-   - {{DATE}} - Generation date (YYYY-MM-DD format)
-   - {{SOURCE_COUNT}} - Number of unique sources
-   - {{METRICS_DASHBOARD}} - Metrics HTML from step 3
-   - {{CONTENT}} - HTML from Part A (script output)
-   - {{BIBLIOGRAPHY}} - HTML from Part B (script output)
-
-7. **CRITICAL: NO EMOJIS** - Remove any emoji characters from final HTML
-
-8. Save to: `[folder]/research_report_[YYYYMMDD]_[slug].html`
-
-9. **Verify HTML (MANDATORY):**
-   ```bash
-   python scripts/verify_html.py --html [html_path] --md [md_path]
-   ```
-   - Check passes: Proceed to step 10
-   - Check fails: Fix errors and re-run verification
-
-10. Open in browser: `open [html_path]`
+**Key principles for HTML generation**:
+- ✅ **Language**: Replace `<html lang="en">` with `<html lang="zh-CN">` and ensure all content is in Chinese
+- ✅ **Semantic HTML**: Use proper tags (`<section>`, `<article>`, `<figure>`, etc.)
+- ✅ **Beautiful tables**: Style with zebra striping, hover effects, proper headers
+- ✅ **Code blocks**: Use syntax highlighting styling, proper line wrapping
+- ✅ **Responsive design**: Ensure mobile-friendly layout
+- ✅ **Readable typography**: Good line height, font sizes, spacing suitable for Chinese
+- ✅ **No emojis**: Remove all emoji characters from final HTML
+- ❌ **No mechanical conversion**: Don't just replace patterns — understand context
 
 **Generate PDF**
 1. Use Task tool with general-purpose agent
@@ -930,12 +913,15 @@ Every report must:
 
 **Location:** `./scripts/`
 
-- **research_engine.py** - Orchestration engine
+- **verify_citations.py** - Citation verification (DOI, URL validation)
 - **validate_report.py** - Quality validation (8 checks)
 - **citation_manager.py** - Citation tracking
 - **source_evaluator.py** - Credibility scoring (0-100)
+- **research_engine.py** - Research orchestration engine
 
 **No external dependencies required.**
+
+**Note:** HTML generation is handled directly by the AI model using type-specific templates, not by scripts.
 
 ---
 
