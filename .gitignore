@@ -55,6 +55,9 @@ htmlcov/
 # MCP
 .mcp/
 
+# Claude Code local config and cache
+.claude/
+
 # Node modules (if any)
 node_modules/
 package-lock.json
