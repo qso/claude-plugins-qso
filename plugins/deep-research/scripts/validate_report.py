@@ -62,11 +62,11 @@ class ReportValidator:
 
     def _check_executive_summary(self) -> bool:
         """Check executive summary exists and is under 250 words"""
-        pattern = r'## Executive Summary(.*?)(?=##|\Z)'
+        pattern = r'##\s+(?:Executive Summary|执行摘要)(.*?)(?=##|\Z)'
         match = re.search(pattern, self.content, re.DOTALL | re.IGNORECASE)
 
         if not match:
-            self.errors.append("Missing 'Executive Summary' section")
+            self.errors.append("Missing 'Executive Summary / 执行摘要' section")
             return False
 
         summary = match.group(1).strip()
@@ -82,71 +82,71 @@ class ReportValidator:
 
     def _check_required_sections(self) -> bool:
         """Check all required sections are present"""
-        # Type-specific required sections
+        # Type-specific required sections (English|Chinese alternates)
         required_by_type = {
             'general': [
-                "Executive Summary",
-                "Introduction",
-                "Main Analysis",
-                "Synthesis",
-                "Limitations",
-                "Recommendations",
-                "Bibliography",
-                "Methodology"
+                "Executive Summary|执行摘要",
+                "Introduction|引言",
+                "Main Analysis|主要分析",
+                "Synthesis|综合分析",
+                "Limitations|局限性",
+                "Recommendations|建议",
+                "Bibliography|参考文献",
+                "Methodology|研究方法"
             ],
             'technical': [
-                "Executive Summary",
-                "What Is It",
-                "Core Concepts",
-                "Architecture",
-                "Ecosystem",
-                "Performance",
-                "Relevance",
-                "Bibliography",
-                "Methodology"
+                "Executive Summary|执行摘要",
+                "What Is It|概述与背景",
+                "Core Concepts|核心概念",
+                "Architecture|架构",
+                "Ecosystem|生态",
+                "Performance|性能",
+                "Relevance|相关性|建议",
+                "Bibliography|参考文献",
+                "Methodology|研究方法"
             ],
             'comparison': [
-                "Executive Summary",
-                "Introduction",
-                "Overview",
-                "Head-to-Head",
-                "Use Case",
-                "Recommendation",
-                "Bibliography",
-                "Methodology"
+                "Executive Summary|执行摘要",
+                "Introduction|引言|比较维度",
+                "Overview|概述|选项",
+                "Head-to-Head|正面对比",
+                "Use Case|使用场景",
+                "Recommendation|结论与建议|建议",
+                "Bibliography|参考文献",
+                "Methodology|研究方法"
             ],
             'market': [
-                "Executive Summary",
-                "Market Definition",
-                "Market Size",
-                "Competitive Landscape",
-                "Trends",
-                "Risks",
-                "Recommendations",
-                "Bibliography",
-                "Methodology"
+                "Executive Summary|执行摘要",
+                "Market Definition|市场定义",
+                "Market Size|市场规模",
+                "Competitive Landscape|竞争格局",
+                "Trends|趋势",
+                "Risks|风险",
+                "Recommendations|战略建议|建议",
+                "Bibliography|参考文献",
+                "Methodology|研究方法"
             ],
             'exploratory': [
-                "Executive Summary",
-                "Introduction",
-                "Main Analysis",
-                "Synthesis",
-                "Limitations",
-                "Recommendations",
-                "Bibliography",
-                "Methodology"
+                "Executive Summary|执行摘要",
+                "Introduction|引言",
+                "Main Analysis|主要分析",
+                "Synthesis|综合分析",
+                "Limitations|局限性",
+                "Recommendations|建议",
+                "Bibliography|参考文献",
+                "Methodology|研究方法"
             ],
             'stock': [
-                "Executive Summary",
-                "Company Overview",
-                "Financial Fundamentals",
-                "Industry Position",
-                "Catalysts",
-                "Risk",
-                "Valuation",
-                "Investment Recommendation",
-                "Bibliography",
-                "Methodology"
+                "Executive Summary|执行摘要",
+                "Company Overview|公司概述",
+                "Financial Fundamentals|财务基本面",
+                "Industry Position|行业地位|竞争壁垒",
+                "Catalysts|催化剂|动态",
+                "Risk|风险",
+                "Valuation|估值",
+                "Investment Recommendation|投资建议",
+                "Bibliography|参考文献",
+                "Methodology|研究方法"
             ],
         }
 
@@ -154,14 +154,16 @@ class ReportValidator:
 
         # Recommended sections (warnings if missing, not errors)
         recommended = [
-            "Counterevidence Register",
-            "Claims-Evidence Table"
+            "Counterevidence Register|反证记录",
+            "Claims-Evidence Table|证据链对照表"
         ]
 
         missing = []
         for section in required:
-            if not re.search(rf'##.*{section}', self.content, re.IGNORECASE):
-                missing.append(section)
+            # section is "English|Chinese" alternation — build regex
+            alts = '|'.join(re.escape(s) for s in section.split('|'))
+            if not re.search(rf'##.*(?:{alts})', self.content, re.IGNORECASE):
+                missing.append(section.split('|')[0])
 
         if missing:
             self.errors.append(f"Missing sections: {', '.join(missing)}")
@@ -170,8 +172,9 @@ class ReportValidator:
         # Check recommended sections (warnings only)
         missing_recommended = []
         for section in recommended:
-            if not re.search(rf'##.*{section}', self.content, re.IGNORECASE):
-                missing_recommended.append(section)
+            alts = '|'.join(re.escape(s) for s in section.split('|'))
+            if not re.search(rf'##.*(?:{alts})', self.content, re.IGNORECASE):
+                missing_recommended.append(section.split('|')[0])
 
         if missing_recommended:
             self.warnings.append(f"Missing recommended sections (for academic rigor): {', '.join(missing_recommended)}")
@@ -206,11 +209,11 @@ class ReportValidator:
 
     def _check_bibliography(self) -> bool:
         """Check bibliography exists, matches citations, and has no truncation placeholders"""
-        pattern = r'## Bibliography(.*?)(?=##|\Z)'
+        pattern = r'##\s+(?:Bibliography|参考文献)(.*?)(?=##|\Z)'
         match = re.search(pattern, self.content, re.DOTALL | re.IGNORECASE)
 
         if not match:
-            self.errors.append("Missing 'Bibliography' section")
+            self.errors.append("Missing 'Bibliography / 参考文献' section")
             return False
 
         bib_section = match.group(1)
@@ -316,7 +319,7 @@ class ReportValidator:
 
     def _check_source_count(self) -> bool:
         """Check minimum source count"""
-        pattern = r'## Bibliography(.*?)(?=##|\Z)'
+        pattern = r'##\s+(?:Bibliography|参考文献)(.*?)(?=##|\Z)'
         match = re.search(pattern, self.content, re.DOTALL | re.IGNORECASE)
 
         if not match:

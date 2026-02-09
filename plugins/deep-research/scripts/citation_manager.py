@@ -101,14 +101,14 @@ class CitationManager:
     def generate_bibliography(self, style: str = "markdown") -> str:
         """Generate full bibliography"""
         if style == "markdown":
-            lines = ["## Bibliography\n"]
+            lines = ["## 参考文献\n"]
             for i, citation_id in enumerate(self.citation_order, 1):
                 citation = self.citations[citation_id]
                 lines.append(citation.to_markdown(i))
             return "\n".join(lines)
 
         elif style == "apa":
-            lines = ["## Bibliography\n"]
+            lines = ["## 参考文献\n"]
             for i, citation_id in enumerate(self.citation_order, 1):
                 citation = self.citations[citation_id]
                 lines.append(citation.to_apa(i))

@@ -66,11 +66,11 @@ class CitationVerifier:
 
     def extract_bibliography(self) -> List[Dict]:
         """Extract bibliography entries from report"""
-        pattern = r'## Bibliography(.*?)(?=##|\Z)'
+        pattern = r'##\s+(?:Bibliography|参考文献)(.*?)(?=##|\Z)'
         match = re.search(pattern, self.content, re.DOTALL | re.IGNORECASE)
 
         if not match:
-            self.errors.append("No Bibliography section found")
+            self.errors.append("No Bibliography / 参考文献 section found")
             return []
 
         bib_section = match.group(1)
