@@ -2,7 +2,7 @@
   "name": "qso-plugins",
   "owner": {
     "name": "qso",
-    "email": "qso@users.noreply.github.com"
+    "email": "qsolee@gmail.com"
   },
   "metadata": {
     "description": "QSO's collection of high-quality plugins for AI-powered presentations, deep research, and Volcengine AI capabilities",
@@ -69,6 +69,30 @@
         "multi-skill",
         "translation",
         "tts"
+      ],
+      "license": "MIT",
+      "author": {
+        "name": "qso",
+        "url": "https://github.com/qso"
+      },
+      "homepage": "https://github.com/qso/claude-plugins-qso",
+      "repository": "https://github.com/qso/claude-plugins-qso.git"
+    },
+    {
+      "name": "x-ai-news-researcher",
+      "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news from X.com (Twitter). Features 6-phase workflow: fetch via bird CLI, intelligent filtering, topic prioritization, and optional deep-research integration.",
+      "version": "1.0.0",
+      "source": "./plugins/x-ai-news-researcher",
+      "keywords": [
+        "ai-news",
+        "news",
+        "research",
+        "ai-trends",
+        "industry-analysis",
+        "news-aggregation",
+        "x-twitter",
+        "bird-cli",
+        "deep-research"
       ],
       "license": "MIT",
       "author": {

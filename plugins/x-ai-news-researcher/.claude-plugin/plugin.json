@@ -1,0 +1,23 @@
+{
+  "name": "x-ai-news-researcher",
+  "version": "1.0.0",
+  "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news from X.com (Twitter). Features 6-phase workflow: fetch via bird CLI, intelligent filtering, topic prioritization, and optional deep-research integration.",
+  "author": {
+    "name": "qso",
+    "url": "https://github.com/qso"
+  },
+  "homepage": "https://github.com/qso/claude-plugins-qso",
+  "repository": "https://github.com/qso/claude-plugins-qso.git",
+  "license": "MIT",
+  "keywords": [
+    "ai-news",
+    "news",
+    "research",
+    "ai-trends",
+    "industry-analysis",
+    "news-aggregation",
+    "x-twitter",
+    "bird-cli",
+    "deep-research"
+  ]
+}
