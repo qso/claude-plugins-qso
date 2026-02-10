@@ -150,6 +150,35 @@ Format each tweet as:
 
 Same format as Home Timeline. Label each entry with the search query that produced it.
 
+**Step 5: Fetch Full Content for Valuable Tweets (Phase 2.5)**
+
+Bird `home` and `news --with-tweets` may return truncated content. For tweets that appear valuable based on initial scan:
+
+1. Identify tweets with high engagement OR from authoritative sources OR about significant topics
+2. Collect their tweet IDs (numeric IDs like `2020865177525305840`)
+3. Fetch full content via bird-fetcher agent:
+```
+Task(
+  subagent_type = "bird-fetcher" (agent),
+  prompt = """
+  Fetch full content for these tweet IDs using bird read:
+  zsh -c 'source ~/.zshrc && bird read 2020865177525305840 --json --plain'
+  zsh -c 'source ~/.zshrc && bird read 2020865177525305841 --json --plain'
+  ... (up to 10 IDs in parallel)
+
+  Return FULL_TWEET_DATA with complete text, media, quoted tweets, and reply context.
+  """
+)
+```
+
+4. Append the full content to the respective markdown files (`01_raw_ai_news.md` or `02_raw_home_timeline.md`) under a `### Full Content (Fetched)` section for each enriched tweet.
+
+**Priority for full fetch:**
+- Tweets from known AI researchers/companies (OpenAI, Anthropic, Google DeepMind, etc.)
+- Tweets with high engagement (likeCount > 500 OR retweetCount > 100)
+- Tweets mentioning new models, papers, or product releases
+- Tweets with truncated text ending in "..." (obviously cut off)
+
 ---
 
 ### Phase 3: ANALYZE — Content Analysis & Filtering
@@ -174,6 +203,30 @@ Read `01_raw_ai_news.md` and `02_raw_home_timeline.md`, apply LLM analysis.
 - **Reposts of old news**: Check recency — if the underlying event is >7 days old, deprioritize
 - **Non-AI content**: Content that passed through bird's AI filter but is actually about crypto, general tech drama, or pure memes without AI substance
 - **Low-information tweets**: One-line reactions, emoji-only responses, "this is huge" with no elaboration
+
+#### Ambiguous Concept Resolution
+
+Only use WebSearch when a tweet contains **unrecognized terms or acronyms** that you genuinely cannot classify. Do NOT search for content that is clearly low-value regardless of terminology (e.g., "this is huge" or emoji-only reactions — these are low-information tweets, skip them directly).
+
+**When to search:**
+- The tweet mentions a specific product/model/term you don't recognize AND the tweet has meaningful context suggesting it could be important
+- You cannot determine whether a term is AI-related or not, and the tweet's engagement or source suggests it might be valuable
+
+**When NOT to search:**
+- The tweet is obviously low-information regardless of unknown terms
+- The term is clearly non-AI (crypto, gaming, politics)
+- You already know the term from your training data
+
+**If searching:**
+1. Use **WebSearch** tool: `"<term>" AI` or `"<term>" what is`
+2. Apply findings to re-classify. If non-AI or low-value → filter out.
+
+**Examples of terms that may need verification:**
+- New model names (e.g., "Qwen 4", "DeepSeek V5")
+- Benchmark acronyms (e.g., "MMLU", "HumanEval", "LMSYS")
+- Technical terms (e.g., "MoE", "RLHF", "CoT")
+- Product names from non-English sources
+
 
 #### Analysis Output Format (per item)
 
@@ -213,6 +266,29 @@ From the analyzed results, select **up to 3** topics for potential deep research
 - **Diversity**: Topics should cover different aspects (not 3 variants of the same news).
 - **Research-worthiness**: Each topic must have enough substance to warrant a 15+ minute deep research session. Simple announcements that are fully explained in the tweet don't qualify.
 - **Topic reframing**: If a tweet is about a paper/product/event, the deep-research topic should be the underlying technology/trend, not the tweet itself. Example: A tweet about "GPT-5 released" → research topic is "GPT-5 architecture, capabilities, and industry impact", not "analysis of @OpenAI's tweet".
+
+#### Pragmatic & Precise Topic Formulation
+
+**Be specific, not vague.** The research question must be concrete enough to yield actionable insights.
+
+| Bad (Too Vague) | Good (Precise & Pragmatic) |
+|:----------------|:---------------------------|
+| "What's new in AI agents?" | "Current state of autonomous AI agents: capabilities, limitations, and real-world deployment challenges in 2025" |
+| "Is GPT-5 better?" | "GPT-5 vs Claude 4 vs Gemini 2: comparative analysis on coding, reasoning, and multimodal capabilities based on independent benchmarks" |
+| "AI video generation" | "Recent breakthroughs in AI video generation: Sora, Veo, Kling - technical comparison and practical applications for content creators" |
+| "OpenAI news" | "OpenAI's product strategy shift under new leadership: analysis of recent releases, partnership changes, and competitive positioning" |
+
+**Pragmatic filters to apply:**
+1. **Actionability**: Will this research help the user make decisions (tool selection, investment, career planning)?
+2. **Recency premium**: Breaking news from last 48 hours gets priority over already-covered topics
+3. **Signal-to-noise**: Prefer topics with primary sources (papers, official docs) over opinion pieces
+4. **User relevance**: If user specified interests, prioritize topics aligning with those interests
+
+**Avoid these research topics:**
+- Purely speculative rumors without evidence
+- "X vs Y" where both are minor players without meaningful differentiation
+- Company news that's just PR fluff with no technical substance
+- Topics already extensively covered by major tech outlets in the past week (unless new angles emerged)
 
 Save selections → `${work_dir}/04_deep_dive_candidates.md`
 
@@ -313,6 +389,7 @@ For each approved topic, launch a **Task tool** call with `subagent_type="genera
 ```
 Task(
   subagent_type = "general-purpose",
+  max_turns = 50,
   description = "Deep research: [topic title]",
   prompt = """
   Execute the deep-research skill on the following research question:
@@ -329,13 +406,13 @@ Task(
   - Research type: [technical|comparison|market|general]
   - Output language: Chinese
 
-  IMPORTANT: Override the default project folder. When deep-research initializes its project folder (Phase 2), set:
+  IMPORTANT: Override the default project folder. When deep-research initializes its project folder, set:
+    timestamp=$(date +%Y%m%d_%H%M%S)
+    work_dir="${CLAUDE_PROJECT_DIR}/x-ai-news-researcher_result_${timestamp}
+    date_str=$(date +%Y%m%d)
     project_folder="${work_dir}/${topic_slug}_Research_${date_str}/"
-  Do NOT use the default ${CLAUDE_PROJECT_DIR}/${topic_slug}_Research_${date_str}/
+  
   All output files must be saved inside this overridden project folder.
-
-  Work directory to use: ${work_dir}/
-  Date string: ${date_str}
   """
 )
 ```
@@ -359,11 +436,9 @@ After all deep research tasks complete, present:
 | 1 | [Topic] | ${work_dir}/${topic_slug}_Research_${date_str}/ | ✅ 完成 |
 | 2 | [Topic] | ${work_dir}/${topic_slug}_Research_${date_str}/ | ✅ 完成 |
 | 3 | [Topic] | ${work_dir}/${topic_slug}_Research_${date_str}/ | ❌ 失败 (原因) |
-
-📁 所有文件保存在: ${work_dir}/
 ```
 
-**Note:** deep-research creates folders in the format `${topic_slug}_Research_${date}/`. All research reports will be organized as subdirectories under the main work directory.
+**Note:** deep-research creates folders in the format `${topic_slug}_Research_${date_str}/`. All research reports will be organized as subdirectories under the main work directory.
 
 ---
 

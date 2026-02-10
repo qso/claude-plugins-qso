@@ -98,8 +98,8 @@ All commands should be wrapped with `zsh -c 'source ~/.zshrc && ...'` to load AU
 ### Default Mode (no user topic)
 
 Run exactly **2 commands in parallel**:
-1. `zsh -c 'source ~/.zshrc && bird news --with-tweets --tweets-per-item 3 --ai-only -n 20 --json --plain --timeout 30000'`
-2. `zsh -c 'source ~/.zshrc && bird home -n 30 --json --plain --timeout 30000'`
+1. `zsh -c 'source ~/.zshrc && bird news --with-tweets --tweets-per-item 5 --ai-only -n 20 --json --plain --timeout 30000'`
+2. `zsh -c 'source ~/.zshrc && bird home -n 50 --json --plain --timeout 30000'`
 
 ### Topic Mode (user provides specific topics/keywords)
 
@@ -109,6 +109,19 @@ Run **3 commands in parallel** — the 2 default commands above, plus a targeted
 The caller will specify the user topic in the Task prompt. If multiple topics are given, run one `bird search` per topic (still in parallel).
 
 Label the search results as `SEARCH_DATA_<topic>` in the output.
+
+### Full Content Fetch Mode
+
+When the caller provides specific tweet IDs to fetch full content:
+
+Run `bird read` for each ID IN PARALLEL (up to 10 IDs):
+```
+zsh -c 'source ~/.zshrc && bird read <tweet-id> --json --plain --timeout 30000'
+zsh -c 'source ~/.zshrc && bird read <tweet-id> --json --plain --timeout 30000'
+...
+```
+
+Return results labeled as `FULL_TWEET_DATA`. This mode is used when timeline/news data is truncated and full content is needed for valuable tweets.
 
 ## Execution Protocol
 

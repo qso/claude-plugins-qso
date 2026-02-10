@@ -102,12 +102,20 @@ Validation Gate
 - Proceed without waiting for approval
 
 **Initialize project folder (BEFORE Phase 3):**
+
+If the user explicitly specifies an output directory (e.g., "output to /path/to/dir" or provides a `project_folder` path), use that directory directly. Otherwise, use the default naming convention:
+
 ```bash
 # Extract topic slug and create folder
 topic_slug="[clean_topic_name]"  # e.g., "openclaw", "react_vs_vue"
 date_str=$(date +%Y%m%d)
 folder_name="${topic_slug}_Research_${date_str}"
+
+# If user specified a custom output directory, use it; otherwise use default
+# User-specified: project_folder="/custom/path/topic_Research_20260210"
+# Default:
 project_folder="${CLAUDE_PROJECT_DIR}/${folder_name}"
+
 mkdir -p "${project_folder}"
 mkdir -p "${project_folder}/reference"  # For saving valuable sources
 echo "Project folder: ${project_folder}"
