@@ -3,12 +3,7 @@ name: ai-news-researcher
 description: Discover and analyze the latest AI news from X.com (Twitter). Use when the user wants to find AI industry trends, news, model releases, technology breakthroughs, or wants a daily AI news briefing. Triggers include "AI news", "AI动态", "AI新闻", "today in AI", "AI趋势", "what's happening in AI", "X上的AI消息". Do NOT use for general X.com browsing, non-AI topics, or posting tweets.
 ---
 
-<!-- ============================================================
-     STATIC CONTEXT BLOCK — Layer 1 (cacheable, >1024 tokens)
-     All instructions, methodology, decision trees, and templates.
-     ============================================================ -->
-
-# X AI News Researcher
+# AI News Researcher
 
 ## Purpose
 
@@ -28,14 +23,14 @@ Execution Mode
 ├─ Quick scan (user says "快速扫一眼" / "browse only")
 │   → Phases 1-3 only, present analysis, skip deep research
 ├─ Full workflow (default)
-│   → All 6 phases
+│   → All 7 phases
 └─ Deep research only (user provides specific topics)
     → Skip to Phase 5-6
 ```
 
 ---
 
-## 6-Phase Workflow
+## 7-Phase Workflow
 
 ### Phase 1: FETCH — Data Collection
 
@@ -146,7 +141,7 @@ Format each tweet as:
 
 **Design note:** AI NEWS and HOME TIMELINE are kept in separate files because they come from different signal sources and carry different baseline quality — Explore news is editorially curated by X, while the home timeline reflects the user's personal network.
 
-**Step 4 (Topic Mode only):** Save Search data → `${work_dir}/02b_raw_search_results.md`
+**Step 4:** Save Search data → `${work_dir}/02b_raw_search_results.md`
 
 Same format as Home Timeline. Label each entry with the search query that produced it.
 
@@ -442,6 +437,39 @@ After all deep research tasks complete, present:
 
 ---
 
+### Phase 7: INDEX — Artifact Inventory
+
+在工作流结束时（含提前结束），生成 `${work_dir}/index.json`，记录各阶段产出物路径，供后续 AI 检索使用。
+
+```json
+{
+  "created_at": "<ISO 8601 timestamp>",
+  "work_dir": "<absolute path to work_dir>",
+  "artifacts": {
+    "raw_ai_news": "01_raw_ai_news.md",
+    "raw_home_timeline": "02_raw_home_timeline.md",
+    "raw_search_results": "02b_raw_search_results.md | null",
+    "analysis_results": "03_analysis_results.md",
+    "deep_dive_candidates": "04_deep_dive_candidates.md",
+    "deep_research": [
+      {
+        "topic": "<research question>",
+        "path": "<topic_slug>_Research_<YYYYMMDD>/",
+        "status": "completed | failed | skipped"
+      }
+    ]
+  }
+}
+```
+
+**规则：**
+- 只记录实际产出的文件，未执行的阶段对应字段设为 `null`
+- `deep_research` 数组：每个已批准主题一条，未执行深研时为空数组 `[]`
+- 所有 `path` 使用相对于 `work_dir` 的相对路径
+- 使用 **Write** 工具写入 `${work_dir}/index.json`
+
+---
+
 ## Error Handling Summary
 
 | Scenario | Action |
@@ -463,6 +491,7 @@ After all deep research tasks complete, present:
 
 ```
 ${CLAUDE_PROJECT_DIR}/ai-news-researcher_result_<YYYYMMDD_HHMMSS>/
+├── index.json                        # Phase 7: Artifact inventory for retrieval
 ├── 01_raw_ai_news.md              # Phase 2: Raw AI news from X Explore
 ├── 02_raw_home_timeline.md        # Phase 2: Raw home timeline data
 ├── 02b_raw_search_results.md      # Phase 2: Raw search results (Topic Mode only)
@@ -478,27 +507,3 @@ ${CLAUDE_PROJECT_DIR}/ai-news-researcher_result_<YYYYMMDD_HHMMSS>/
     └── ...
 ```
 
-<!-- End of STATIC CONTEXT BLOCK
-     Above content is cacheable (>1024 tokens, static across invocations).
-     ============================================================ -->
-
----
-
-<!-- ============================================================
-     DYNAMIC EXECUTION ZONE — Layer 3
-     Content below is populated during runtime only.
-     ============================================================ -->
-
-## Dynamic Execution Zone
-
-**User Query:**
-[User request will be processed here during execution]
-
-**Fetch Results:**
-[Bird CLI results will be accumulated here]
-
-**Analysis Results:**
-[Filtered and ranked content will be generated here]
-
-**Deep Research Status:**
-[Research progress tracking will be maintained here via TodoWrite]

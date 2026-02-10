@@ -271,23 +271,42 @@ See [Report section](#5-report) below for progressive file assembly, HTML genera
 7. Industry analysis
 8. Critical analysis/limitations
 
-**Search Tools:**
-- Always: **WebSearch**, **WebFetch**
-- Exa MCP (if EXA_API_KEY set): `web_search_exa`, `web_search_advanced_exa`, `get_code_context_exa`, `company_research_exa`, `crawling_exa`
+**Search Tools — Priority & Fallback Strategy:**
+
+优先使用内置搜索和通用 MCP 工具，仅在主要工具失败或结果不足时降级到 Exa MCP。
+
+| 优先级 | 工具 | 用途 | 可用条件 |
+|:-------|:-----|:-----|:---------|
+| **P0 — 首选搜索** | `WebSearch` | 通用 Web 搜索，获取搜索结果摘要 | 始终可用（内置） |
+| **P0 — 首选抓取** | `WebFetch` | 抓取指定 URL 页面内容并提取信息 | 始终可用（内置） |
+| **P1 — Exa 搜索** | `mcp__exa__web_search_exa` | Exa 通用 Web 搜索，获取干净可用内容 | 需要 `EXA_API_KEY` 环境变量 |
+| **P1 — Exa 高级** | `mcp__exa__web_search_advanced_exa` | Exa 高级搜索（域名/日期/内容过滤） | 需要 `EXA_API_KEY` 环境变量 |
+| **P1 — Exa 抓取** | `mcp__exa__crawling_exa` | 从已知 URL 获取完整网页内容 | 需要 `EXA_API_KEY` 环境变量 |
+| **P2 — Metaso 搜索** | `mcp__mcp-metaso__metaso_search` | 秘塔搜索（支持网页/文库/学术/图片/视频/播客） | MCP 已配置时可用 |
+| **P2 — Metaso 抓取** | `mcp__mcp-metaso__metaso_reader` | 解析网页内容并提取文本 | MCP 已配置时可用 |
+
+**Fallback 降级规则:**
+1. **首先**尝试 P0 工具（`WebSearch` + `WebFetch`），这些始终可用
+2. **同时**使用可用的 P1 MCP 工具以获取多样化结果（并行调用提高效率）
+3. **仅当 P0/P1 工具失败、返回结果不足**，降级使用 P2 MCP 工具
+4. Exa 特有优势场景（优先直接使用）：代码搜索用 `mcp__exa__get_code_context_exa`，企业调研用 `mcp__exa__company_research_exa`
+
+**Exa MCP 依赖:** 需要 `EXA_API_KEY` 环境变量。若未设置则跳过所有 P2 工具，仅使用 P0/P1 完成搜索。
 
 **Execution Steps:**
 1. Filter angles by research type
 2. Decompose into 5-10 independent queries
-3. Assign to optimal tools (WebSearch + Exa for same angle = diverse results)
+3. Assign to optimal tools — 同一搜索角度使用多个不同工具以获取多样化结果（如 `WebSearch` + `mcp__exa__web_search_exa` + ``）
 4. **Launch ALL in single message** (parallel, NOT sequential)
-5. Monitor quality thresholds:
+5. **Fallback check:** 如果 P0/P1 工具返回结果不足（<5 条有效结果），立即使用 P2 Exa 工具补充搜索
+6. Monitor quality thresholds:
    - Quick: 10+ sources, >60/100 OR 2min
    - Standard: 15+ sources, >60/100 OR 5min
    - Deep: 25+ sources, >70/100 OR 10min
    - UltraDeep: 30+ sources, >75/100 OR 15min
-6. Spawn 3-5 parallel agents for deep-dives
-7. **Save valuable sources** to `${project_folder}/reference/`:
-   - For sources with credibility >70/100, use `mcp__web_reader__webReader` to fetch full content
+7. Spawn 3-5 parallel agents for deep-dives
+8. **Save valuable sources** to `${project_folder}/reference/`:
+   - For sources with credibility >70/100, use `WebFetch`（首选）或`mcp__web-reader__webReader`（备选）to fetch full content
    - Save as `reference/[N]_[slug].md` with title, URL, credibility, content, key insights
    - These will be loaded in Phase 8.0 for detailed report generation
 

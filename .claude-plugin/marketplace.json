@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "QSO's collection of high-quality plugins for AI-powered presentations, deep research, and Volcengine AI capabilities",
-    "version": "1.5.0"
+    "version": "1.6.0"
   },
   "plugins": [
     {
@@ -32,7 +32,7 @@
     {
       "name": "deep-research",
       "description": "Conduct enterprise-grade research with multi-source synthesis, citation tracking, and verification. Supports 8-phase research pipeline with source credibility scoring, parallel retrieval, and reference materials preservation. Default output in Chinese with script-based HTML generation.",
-      "version": "1.3.2",
+      "version": "1.3.3",
       "source": "./plugins/deep-research",
       "keywords": [
         "research",
@@ -80,8 +80,8 @@
     },
     {
       "name": "ai-news-researcher",
-      "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news and trends. Features 6-phase workflow: multi-source data collection, intelligent filtering, topic prioritization, and optional deep-research integration.",
-      "version": "1.2.0",
+      "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news and trends. Features 7-phase workflow: multi-source data collection, intelligent filtering, topic prioritization, optional deep-research integration, and artifact indexing.",
+      "version": "1.3.0",
       "source": "./plugins/ai-news-researcher",
       "keywords": [
         "ai-news",
