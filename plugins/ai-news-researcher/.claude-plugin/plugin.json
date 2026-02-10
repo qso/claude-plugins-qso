@@ -1,7 +1,7 @@
 {
-  "name": "x-ai-news-researcher",
-  "version": "1.1.0",
-  "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news from X.com (Twitter). Features 6-phase workflow: fetch via bird CLI, intelligent filtering, topic prioritization, and optional deep-research integration.",
+  "name": "ai-news-researcher",
+  "version": "1.2.0",
+  "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news and trends. Features 6-phase workflow: multi-source data collection, intelligent filtering, topic prioritization, and optional deep-research integration.",
   "author": {
     "name": "qso",
     "url": "https://github.com/qso"

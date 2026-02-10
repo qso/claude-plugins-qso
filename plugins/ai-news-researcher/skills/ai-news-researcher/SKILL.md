@@ -1,5 +1,5 @@
 ---
-name: x-ai-news-researcher
+name: ai-news-researcher
 description: Discover and analyze the latest AI news from X.com (Twitter). Use when the user wants to find AI industry trends, news, model releases, technology breakthroughs, or wants a daily AI news briefing. Triggers include "AI news", "AI动态", "AI新闻", "today in AI", "AI趋势", "what's happening in AI", "X上的AI消息". Do NOT use for general X.com browsing, non-AI topics, or posting tweets.
 ---
 
@@ -49,7 +49,7 @@ Invoke the **bird-fetcher** agent via Task tool to collect data from X.com.
 
 ```
 Task(
-  subagent_type = "bird-fetcher" (agent),
+  subagent_type = "ai-news-researcher:bird-fetcher",
   prompt = """
   Execute pre-flight checks (install verification + auth check).
   Then fetch these two data sources IN PARALLEL:
@@ -69,7 +69,7 @@ Task(
 
 ```
 Task(
-  subagent_type = "bird-fetcher" (agent),
+  subagent_type = "ai-news-researcher:bird-fetcher",
   prompt = """
   Execute pre-flight checks (install verification + auth check).
   Then fetch these data sources IN PARALLEL:
@@ -101,7 +101,7 @@ Task(
 **Step 1:** Create working directory:
 ```bash
 timestamp=$(date +%Y%m%d_%H%M%S)
-work_dir="${CLAUDE_PROJECT_DIR}/x-ai-news-researcher_result_${timestamp}"
+work_dir="${CLAUDE_PROJECT_DIR}/ai-news-researcher_result_${timestamp}"
 mkdir -p "${work_dir}"
 ```
 
@@ -159,7 +159,7 @@ Bird `home` and `news --with-tweets` may return truncated content. For tweets th
 3. Fetch full content via bird-fetcher agent:
 ```
 Task(
-  subagent_type = "bird-fetcher" (agent),
+  subagent_type = "ai-news-researcher:bird-fetcher",
   prompt = """
   Fetch full content for these tweet IDs using bird read:
   zsh -c 'source ~/.zshrc && bird read 2020865177525305840 --json --plain'
@@ -408,7 +408,7 @@ Task(
 
   IMPORTANT: Override the default project folder. When deep-research initializes its project folder, set:
     timestamp=$(date +%Y%m%d_%H%M%S)
-    work_dir="${CLAUDE_PROJECT_DIR}/x-ai-news-researcher_result_${timestamp}
+    work_dir="${CLAUDE_PROJECT_DIR}/ai-news-researcher_result_${timestamp}
     date_str=$(date +%Y%m%d)
     project_folder="${work_dir}/${topic_slug}_Research_${date_str}/"
   
@@ -462,7 +462,7 @@ After all deep research tasks complete, present:
 ## Output Directory Contract
 
 ```
-${CLAUDE_PROJECT_DIR}/x-ai-news-researcher_result_<YYYYMMDD_HHMMSS>/
+${CLAUDE_PROJECT_DIR}/ai-news-researcher_result_<YYYYMMDD_HHMMSS>/
 ├── 01_raw_ai_news.md              # Phase 2: Raw AI news from X Explore
 ├── 02_raw_home_timeline.md        # Phase 2: Raw home timeline data
 ├── 02b_raw_search_results.md      # Phase 2: Raw search results (Topic Mode only)

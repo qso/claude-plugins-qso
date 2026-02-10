@@ -3,7 +3,7 @@ name: ai-researcher
 description: Discover and analyze the latest AI news from X.com, with optional deep-dive research on the most significant topics
 ---
 
-Execute the x-ai-news-researcher skill to discover and analyze the latest AI news from X.com.
+Execute the ai-news-researcher skill to discover and analyze the latest AI news.
 
 $ARGUMENTS
 

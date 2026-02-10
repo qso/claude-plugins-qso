@@ -79,10 +79,10 @@
       "repository": "https://github.com/qso/claude-plugins-qso.git"
     },
     {
-      "name": "x-ai-news-researcher",
-      "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news from X.com (Twitter). Features 6-phase workflow: fetch via bird CLI, intelligent filtering, topic prioritization, and optional deep-research integration.",
-      "version": "1.1.0",
-      "source": "./plugins/x-ai-news-researcher",
+      "name": "ai-news-researcher",
+      "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news and trends. Features 6-phase workflow: multi-source data collection, intelligent filtering, topic prioritization, and optional deep-research integration.",
+      "version": "1.2.0",
+      "source": "./plugins/ai-news-researcher",
       "keywords": [
         "ai-news",
         "news",
