@@ -787,7 +787,7 @@ Context preservation ensures coherence across continuation boundaries.
 Use the `md_to_html.py` script to convert the markdown report to styled HTML:
 
 ```bash
-python3 ${CLAUDE_PLUGIN_ROOT}/scripts/md_to_html.py [markdown_file] --open
+python3 ${CLAUDE_PLUGIN_ROOT}/scripts/md_to_html.py [markdown_file] 
 ```
 
 The script automatically:
@@ -799,11 +799,9 @@ The script automatically:
 6. Builds a metrics dashboard (sources, sections, word count, mode, confidence)
 7. Sets `<html lang="zh-CN">` for Chinese content
 8. Removes emoji characters from final output
-9. Saves HTML file and opens it in browser (with `--open` flag)
 
 **Usage options:**
 - `--output/-o <path>`: Specify output file path (default: same name with .html extension)
-- `--open`: Open the HTML file in browser after conversion
 
 **Template routing** (automatic based on `<!-- TYPE: xxx -->` in markdown):
 | Type | Template |

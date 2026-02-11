@@ -379,11 +379,12 @@ Only executes if user approves in Phase 5.
 
 #### Step 2: Parallel Execution via Task Tool
 
-For each approved topic, launch a **Task tool** call with `subagent_type="general-purpose"`:
+For each approved topic, launch a **Task tool** call with `subagent_type="general-purpose"` and **`skills=["deep-research"]`** 预加载 deep-research skill：
 
 ```
 Task(
   subagent_type = "general-purpose",
+  skills = ["deep-research"],
   max_turns = 50,
   description = "Deep research: [topic title]",
   prompt = """
@@ -391,7 +392,7 @@ Task(
 
   [Formulated research question from Phase 4]
 
-  Context: This research was triggered by an AI news item from X.com:
+  Context: This research was triggered by an AI news item:
   - Original tweet: [URL]
   - Author: [@handle]
   - Key claim/observation: [summary]
@@ -401,16 +402,15 @@ Task(
   - Research type: [technical|comparison|market|general]
   - Output language: Chinese
 
-  IMPORTANT: Override the default project folder. When deep-research initializes its project folder, set:
-    timestamp=$(date +%Y%m%d_%H%M%S)
-    work_dir="${CLAUDE_PROJECT_DIR}/ai-news-researcher_result_${timestamp}
-    date_str=$(date +%Y%m%d)
-    project_folder="${work_dir}/${topic_slug}_Research_${date_str}/"
-  
-  All output files must be saved inside this overridden project folder.
+  IMPORTANT: Override the default project folder:
+    project_folder="[work_dir]/[topic_slug]_Research_[YYYYMMDD]/"
+
+  All output files must be saved inside this project_folder.
   """
 )
 ```
+
+**CRITICAL:** `skills = ["deep-research"]` 确保 subagent 启动时预加载 deep-research skill 的完整上下文（8 阶段流水线、文件命名规范、报告模板、验证脚本等）。**不要省略此字段**，否则 subagent 会退化为自由发挥的研究，产出不符合规范。
 
 **Parallel execution rules:**
 - Launch **up to 3** Task calls in a **single message** for maximum parallelism.

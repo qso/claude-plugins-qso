@@ -81,7 +81,7 @@
     {
       "name": "ai-news-researcher",
       "description": "AI news researcher plugin for discovering, analyzing, and summarizing the latest AI industry news and trends. Features 7-phase workflow: multi-source data collection, intelligent filtering, topic prioritization, optional deep-research integration, and artifact indexing.",
-      "version": "1.3.0",
+      "version": "1.3.1",
       "source": "./plugins/ai-news-researcher",
       "keywords": [
         "ai-news",
