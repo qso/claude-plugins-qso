@@ -1,7 +1,5 @@
 {
-  "mcpServers": {
-    "exa": {
-      "url": "https://mcp.exa.ai/mcp?exaApiKey=${EXA_API_KEY}"
-    }
+  "exa": {
+    "url": "https://mcp.exa.ai/mcp?exaApiKey=${EXA_API_KEY}"
   }
 }
