@@ -385,7 +385,7 @@ For each approved topic, launch a **Task tool** call with `subagent_type="genera
 Task(
   subagent_type = "general-purpose",
   skills = ["deep-research"],
-  max_turns = 50,
+  max_turns = 100,
   description = "Deep research: [topic title]",
   prompt = """
   Execute the deep-research skill on the following research question:
@@ -409,8 +409,6 @@ Task(
   """
 )
 ```
-
-**CRITICAL:** `skills = ["deep-research"]` 确保 subagent 启动时预加载 deep-research skill 的完整上下文（8 阶段流水线、文件命名规范、报告模板、验证脚本等）。**不要省略此字段**，否则 subagent 会退化为自由发挥的研究，产出不符合规范。
 
 **Parallel execution rules:**
 - Launch **up to 3** Task calls in a **single message** for maximum parallelism.
